@@ -11,6 +11,10 @@ video/
 # Fora do repositório público de propósito.
 CLAUDE.md
 
+# Demo de carga: 100 produtos FICTÍCIOS, só pra testar volume.
+# Fica local de propósito — publicada, viraria catálogo falso no ar.
+demo.html
+
 # Lixo de sistema operacional
 Thumbs.db
 ehthumbs.db

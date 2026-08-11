@@ -1,0 +1,107 @@
+# Notas do projeto
+
+Coisas medidas que não estão óbvias no código, e decisões que vão
+voltar à tona depois.
+
+---
+
+## Limite da URL do WhatsApp (estrutural, sem contorno aplicado)
+
+**O problema:** o pedido inteiro viaja dentro da URL do `wa.me`. O
+site não manda o pedido pra lugar nenhum — ele monta um texto e
+enfia no endereço. Quanto mais itens no carrinho, maior o endereço.
+
+**Medido em 11/08/2026**, com nomes de produto parecidos com os reais:
+
+| itens distintos | mensagem (caracteres) | URL do wa.me |
+|---|---|---|
+| 1 | 112 | 208 |
+| 5 | 283 | 494 |
+| 10 | 545 | 968 |
+| 15 | 786 | 1.378 |
+| **25** | 1.301 | **2.270** |
+| 50 | 2.532 | 4.434 |
+| 100 | 5.198 | 9.193 |
+
+**Onde dói:** a partir de ~25 itens distintos a URL passa de 2.048
+caracteres. Esse é o ponto onde navegadores antigos e webviews (o
+navegador embutido do próprio WhatsApp, por exemplo) começam a
+cortar URL. Chrome e Safari modernos aguentam bem mais, mas **o
+wa.me não documenta limite nenhum** — então não dá pra afirmar onde
+quebra de verdade, só que acima disso é terreno sem garantia.
+
+**Por que importa:** é exatamente o perfil do revendedor, que a loja
+atende e que pede 30 itens de uma vez. Com 4 produtos no catálogo
+nunca vai acontecer. Com atacado de verdade, vai.
+
+**Não foi contornado.** Decisão consciente de 11/08/2026: registrar
+e seguir. Quando o assunto voltar, as saídas conhecidas são:
+
+- Encurtar a linha do item (tirar medida, abreviar nome)
+- Limitar quantos itens distintos entram no pedido, com aviso claro
+- Quebrar em mais de uma mensagem
+- Parar de mandar o pedido pela URL — exigiria backend, o que muda
+  a natureza do projeto e contraria o CLAUDE.md
+
+O comentário equivalente está em `index.html`, em cima de
+`mensagemDoPedido()`, pra quem mexer no código topar com ele.
+
+---
+
+## Teste de carga do catálogo (11/08/2026)
+
+Rodado com `demo.html`, 100 produtos fictícios em 20 categorias.
+O arquivo é **local, não publicado**, e está no `.gitignore`.
+
+O que aguentou bem:
+
+- Montar 100 cards: **3,5 ms**. Re-render ao filtrar: **0,1 ms**.
+  Performance de JS não é gargalo, e paginação não se justifica
+  por esse motivo.
+- Arquivo de 60 KB com 100 produtos (contra 27 KB com 4).
+- Carrinho com 15 itens: renderiza certo, botão de enviar continua
+  alcançável na base fixa do modal.
+- Zero estouro lateral em qualquer largura.
+
+O que quebrou:
+
+- **21 chips de filtro no celular viram 7 fileiras, 253 px, 28% da
+  tela.** O primeiro produto vai pra y=713 px — mais de uma tela de
+  rolagem antes de qualquer mercadoria.
+- Página com 18.049 px de altura em 360 px (20 telas), sem busca,
+  sem paginação e sem marco nenhum de orientação.
+- 213 paradas de Tab, sem atalho pra pular pros produtos.
+
+**Não medido:** tempo de carregamento com fotos de verdade. A demo
+tem zero imagens. Com 100 produtos fotografados seriam 100 a 300
+arquivos; as imagens já saem com `loading="lazy"`, mas a primeira
+tela ainda puxa o que está visível. Qualquer número sobre isso hoje
+seria chute.
+
+---
+
+## Decisões que dependem do tamanho do catálogo
+
+Recusadas hoje **porque o catálogo é pequeno**, não porque são
+ruins. Revisar quando ele crescer:
+
+- **Fita horizontal de categorias** — recusada com 2 categorias,
+  porque fita que não rola parece quebrada. Com 20, passa a ser a
+  resposta certa (ou um `<select>` nativo, que resolve 20 opções em
+  40 px de tela no celular).
+- **Busca** — com 100 produtos vira a navegação principal. Com 4,
+  não tem o que buscar.
+- **Agrupar categorias em dois níveis** — depende do dono definir a
+  taxonomia da loja dele, não é decisão técnica.
+- **Banner promocional no topo** — recusado porque não há preço nem
+  promoção pra anunciar. Reabrir quando houver.
+
+---
+
+## O que mais move o ponteiro, e não é código
+
+A referência que o dono usa (alemaopipas.com.br) tem centenas de
+produtos e **preço grande em todos**. A vitrine tem 4 produtos e
+"Sob consulta" nos quatro. A sensação de "loja de verdade" vem daí,
+não de banner nem de barra fixa. **Colocar preço nos produtos muda
+mais do que qualquer ajuste de layout.**

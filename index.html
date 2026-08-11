@@ -68,7 +68,7 @@
 
 *,*::before,*::after{box-sizing:border-box}
 
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 
 body{
   margin:0;
@@ -351,6 +351,12 @@ button,a,summary,label{touch-action:manipulation}
 .loja{padding-bottom:clamp(2.5rem,6vw,4rem)}
 
 .filtros{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:clamp(.7rem,2.2vw,1.15rem)}
+
+/* ao filtrar, a página volta pros filtros — não pra grade — pra
+   os chips continuarem visíveis e dar pra trocar de novo.
+   A margem desconta o cabeçalho grudado do desktop. */
+.filtros{scroll-margin-top:1rem}
+@media (min-width:900px){ .filtros{scroll-margin-top:140px} }
 
 .chip{
   font-family:inherit;
@@ -1451,6 +1457,29 @@ function totalItens(){
   return CARRINHO.reduce(function(s, i){ return s + i.qtd; }, 0);
 }
 
+/* ============================================================
+   LIMITE CONHECIDO — leia antes de mexer aqui
+
+   O pedido inteiro viaja DENTRO da URL do wa.me. Quanto mais
+   itens, maior o endereço. Medido em 11/08/2026 com produtos de
+   nome parecido com os reais:
+
+       itens |  mensagem  |  URL
+          1  |    112     |    208
+         15  |    786     |  1.378
+         25  |  1.301     |  2.270   <- passa de 2.048
+         50  |  2.532     |  4.434
+        100  |  5.198     |  9.193
+
+   Acima de ~25 itens distintos a URL passa de 2.048 caracteres,
+   que é onde navegadores antigos e webviews começam a cortar. O
+   wa.me não publica limite nenhum, então não dá pra saber onde
+   quebra de verdade — só que é terreno sem garantia.
+
+   Importa porque é o perfil do REVENDEDOR, que pede 30 itens de
+   uma vez. Não tem contorno aplicado aqui: quando for tratar
+   atacado a sério, isso volta. Detalhes em NOTAS.md.
+   ============================================================ */
 function mensagemDoPedido(){
   const linhas = CARRINHO.map(function(i){
     const preco = precoEmReais(i.produto.preco);
@@ -1606,6 +1635,48 @@ function abrirCarrinho(){
 
 /* ---------------- filtros e grade ---------------- */
 
+/* ============================================================
+   CATEGORIA NA URL
+
+   Dá pra mandar link direto de uma categoria pelo WhatsApp:
+
+     .../franca-pipas/#carretilhas
+     .../franca-pipas/#papel-de-seda
+
+   O apelido sai do nome da categoria sozinho — minúsculo, sem
+   acento, espaço vira hífen. Categoria nova já ganha link sem
+   ninguém precisar cadastrar nada. Link com categoria que não
+   existe mais cai em "Tudo" em vez de mostrar página vazia.
+   ============================================================ */
+function apelido(texto){
+  return texto.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')   // tira acento
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function categoriaDaUrl(){
+  let alvo = '';
+  try { alvo = decodeURIComponent(location.hash.replace(/^#/, '')); } catch (e) { alvo = ''; }
+  if (!alvo) return 'Tudo';
+  const achada = PRODUTOS.find(function(p){ return apelido(p.categoria) === alvo; });
+  return achada ? achada.categoria : 'Tudo';
+}
+
+function gravaUrl(categoria){
+  const base = location.pathname + location.search;
+  const nova = categoria === 'Tudo' ? base : base + '#' + apelido(categoria);
+  // replaceState não dispara hashchange, então não vira laço
+  history.replaceState(null, '', nova);
+}
+
+// clique do usuário: filtra, grava na URL e volta pros filtros
+function escolherCategoria(categoria){
+  mostrar(categoria);
+  gravaUrl(categoria);
+  filtros.scrollIntoView({ block: 'start' });
+}
+
 function mostrar(categoria){
   const lista = [];
   PRODUTOS.forEach(function(p, i){
@@ -1639,7 +1710,7 @@ function montaFiltros(){
     chip.dataset.categoria = categoria;
     chip.setAttribute('aria-pressed', 'false');
     chip.textContent = categoria;
-    chip.addEventListener('click', function(){ mostrar(categoria); });
+    chip.addEventListener('click', function(){ escolherCategoria(categoria); });
     filtros.appendChild(chip);
   });
 }
@@ -1669,7 +1740,11 @@ document.getElementById('abrir-carrinho-barra').addEventListener('click', abrirC
 
 ajustaLogo();
 montaFiltros();
-mostrar('Tudo');
+// abre já na categoria do link, se veio uma. Sem rolar: quem chega
+// pelo link tem que ver o topo da loja primeiro.
+mostrar(categoriaDaUrl());
+// se alguém editar o endereço na mão ou usar voltar/avançar
+window.addEventListener('hashchange', function(){ mostrar(categoriaDaUrl()); });
 atualizarCarrinho();
 
 const perguntaGeral = linkWhats('Olá! Vi o site da França Pipas e queria perguntar sobre um produto.');
