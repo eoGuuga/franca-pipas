@@ -2,7 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- viewport-fit=cover deixa o fundo ir até a borda no iPhone; o recorte
+     do notch e do indicador de home é devolvido pelo env(safe-area-inset-*) -->
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
 <!-- =========================================================
      ENDEREÇO DO SITE PUBLICADO
      Hoje aponta pro GitHub Pages. Se um dia comprar domínio
@@ -13,9 +16,9 @@
      ========================================================= -->
 
 <title>França Pipas — pipa, carretilha e linha, atacado e varejo em Francisco Morato</title>
-<meta name="description" content="Carretilha, linha, pipa e rabiola de acabamento caprichado, no atacado e no varejo. Francisco Morato, SP. Veja o que tem na loja e peça pelo WhatsApp.">
+<meta name="description" content="Carretilha, linha, pipa e rabiola de acabamento caprichado, no atacado e no varejo. Francisco Morato, SP. Monte o pedido e mande pelo WhatsApp.">
 <link rel="canonical" href="https://eoguuga.github.io/franca-pipas/">
-<meta name="theme-color" content="#04153E">
+<meta name="theme-color" content="#FFFFFF">
 
 <!-- ícone da aba do navegador e do atalho na tela do celular -->
 <link rel="icon" type="image/png" sizes="96x96" href="fotos/icone.png">
@@ -26,7 +29,7 @@
 <meta property="og:site_name" content="França Pipas">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="França Pipas — carretilha, linha e pipa no atacado e varejo">
-<meta property="og:description" content="Veja o que tem na loja e peça pelo WhatsApp. Varejo e atacado, Francisco Morato, SP.">
+<meta property="og:description" content="Monte seu pedido e mande pelo WhatsApp. Varejo e atacado, Francisco Morato, SP.">
 <meta property="og:url" content="https://eoguuga.github.io/franca-pipas/">
 <meta property="og:image" content="https://eoguuga.github.io/franca-pipas/fotos/link-whatsapp.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -41,35 +44,25 @@
 
 <style>
 :root{
-  /* ---- cores da logo ----
-     Tiradas do arquivo fotos/logo.jpg, medindo os pixels.
-     Pra trocar a cor do site inteiro, mexe só aqui.
-     azul-fundo    fundo escuro atrás da logo
-     azul-moldura  azul vivo da moldura recortada
-     amarelo       topo das letras FRANÇA PIPAS
-     laranja       base das letras e do pôr do sol
-     preto         o contorno grosso de tudo                       */
+  /* ---- cores da logo, agora como ACENTO sobre fundo branco ----
+     Pra trocar a cor do site inteiro, mexe só aqui.              */
   --azul-fundo:#04153E;
-  --azul-moldura:#0D92E3;
-  --azul-claro:#BFE0F8;
+  --azul-vivo:#0D92E3;
   --amarelo:#FFF200;
   --laranja:#FF8500;
   --preto:#0A0A0B;
 
-  --papel:#EEF1FA;
   --branco:#FFFFFF;
-  --tinta-fraca:#464C6B;
-  --borda-fraca:#6C7CAE;
+  --papel:#F2F3F6;     /* fundo atrás da foto do produto */
+  --tinta:#141621;
+  --tinta-fraca:#5A6072;
+  --borda:#DFE2EA;
 
-  /* ---- contorno preto ----
-     Espessura do traço e da sombra dura, usadas no site todo.
-     Mudar aqui muda o peso do contorno em tudo de uma vez.       */
-  --traco:3px;
-  --traco-fino:2.5px;
-  --sombra:4px 4px 0 var(--preto);
-  --sombra-media:3px 3px 0 var(--preto);
+  --traco:2px;
+  --sombra:3px 3px 0 var(--preto);
 
-  --margem:clamp(1rem, 4.5vw, 3rem);
+  --limite:1120px;                       /* largura máxima do conteúdo */
+  --gutter:clamp(1rem, 4vw, 2rem);
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -78,322 +71,115 @@ html{-webkit-text-size-adjust:100%}
 
 body{
   margin:0;
-  background:var(--papel);
-  color:var(--preto);
+  background:var(--branco);
+  color:var(--tinta);
   font-family:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
   font-size:16px;
   line-height:1.5;
 }
 
 img{display:block;max-width:100%}
+h1,h2,h3,p,ul,li{margin:0;padding:0}
+ul{list-style:none}
 
-h1,h2,h3,p{margin:0}
-
-:focus-visible{
-  outline:3px solid var(--preto);
-  outline-offset:3px;
-}
+:focus-visible{outline:3px solid var(--preto);outline-offset:3px}
 
 .so-leitor{
-  position:absolute;width:1px;height:1px;
-  padding:0;margin:-1px;overflow:hidden;
-  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
 }
+
+/* conteúdo centralizado, com folga extra pro notch em paisagem */
+.conteudo{
+  width:100%;
+  max-width:var(--limite);
+  margin-inline:auto;
+  padding-left:calc(var(--gutter) + env(safe-area-inset-left, 0px));
+  padding-right:calc(var(--gutter) + env(safe-area-inset-right, 0px));
+}
+
+/* ---------- botões ---------- */
+
+.botao{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.4rem;
+  font-family:inherit;
+  font-size:.8rem;
+  font-weight:800;
+  font-stretch:86%;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  line-height:1.1;
+  text-align:center;
+  text-decoration:none;
+  cursor:pointer;
+  padding:.8rem 1rem;
+  color:var(--preto);
+  background:var(--laranja);
+  border:var(--traco) solid var(--preto);
+  border-radius:6px;
+  box-shadow:var(--sombra);
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+
+.botao:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--preto)}
+.botao:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--preto)}
+.botao--bloco{width:100%}
+.botao--amarelo{background:var(--amarelo)}
+.botao--grande{font-size:1rem;padding:1rem 1.4rem}
+
+.botao-simples{
+  font-family:inherit;
+  font-size:.72rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  cursor:pointer;
+  padding:.3rem .1rem;
+  color:var(--tinta-fraca);
+  background:none;
+  border:0;
+  border-bottom:1px solid var(--borda);
+}
+
+.botao-simples:hover{color:var(--preto);border-bottom-color:var(--preto)}
 
 /* ---------- topo ---------- */
 
 .topo{
-  background:var(--azul-fundo);
-  padding:1rem var(--margem);
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:var(--branco);
+  border-bottom:var(--traco) solid var(--preto);
+  padding-top:env(safe-area-inset-top, 0px);
+}
+
+.topo__interno{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  flex-wrap:wrap;
+  gap:.75rem;
+  padding-top:.6rem;
+  padding-bottom:.6rem;
 }
 
-.marca{display:flex;align-items:center;min-height:72px}
+.marca{display:flex;align-items:center;flex:none}
 
-/* a logo tem fundo próprio, então o contorno preto vira a aresta
-   dela de propósito, em vez de virar emenda com o fundo do site */
-.marca__logo{
-  height:clamp(72px,17vw,108px);
-  width:auto;
-  border:var(--traco) solid var(--preto);
-  border-radius:6px;
-  box-shadow:var(--sombra-media);
-}
+.marca__logo{height:clamp(46px,11vw,62px);width:auto;border-radius:5px}
 
 .marca__texto{
-  color:var(--branco);
-  font-size:clamp(1.15rem,4.5vw,1.5rem);
+  font-size:1.05rem;
   font-weight:900;
-  font-stretch:82%;
+  font-stretch:84%;
   text-transform:uppercase;
-  letter-spacing:.01em;
-  line-height:1.1;
+  line-height:1.05;
 }
 
 .topo__local{
-  color:var(--amarelo);
-  font-size:.72rem;
-  font-weight:700;
-  font-stretch:78%;
-  text-transform:uppercase;
-  letter-spacing:.14em;
-}
-
-/* ---------- abertura ---------- */
-
-.abertura{
-  background:var(--azul-fundo);
-  border-bottom:var(--traco) solid var(--preto);
-  padding:clamp(1.25rem,5vw,2.75rem) var(--margem) clamp(1.75rem,5.5vw,3rem);
-}
-
-/* mesma construção da logo: campo azul escuro, moldura em azul
-   mais claro, linha preta grossa por fora e por dentro dela */
-.abertura__moldura{
-  background:var(--azul-fundo);
-  border:clamp(7px,2.2vw,14px) solid var(--azul-moldura);
-  border-radius:8px;
-  box-shadow:0 0 0 var(--traco) var(--preto), inset 0 0 0 var(--traco) var(--preto);
-  padding:clamp(1.5rem,5.5vw,3rem);
-}
-
-/* letreiro com contorno preto, igual ao nome na logo */
-.abertura__titulo{
-  color:var(--amarelo);
-  -webkit-text-stroke:clamp(3px,1.1vw,8px) var(--preto);
-  paint-order:stroke fill;
-  font-size:clamp(2.4rem,10.5vw,5.25rem);
-  font-weight:900;
-  font-stretch:80%;
-  text-transform:uppercase;
-  line-height:.96;
-  letter-spacing:-.015em;
-  max-width:13ch;
-}
-
-.abertura__titulo span{color:var(--laranja)}
-
-.abertura__linha{
-  color:var(--branco);
-  margin-top:1.1rem;
-  max-width:38ch;
-  font-size:clamp(1rem,3.4vw,1.15rem);
-  font-weight:450;
-}
-
-.horario{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.6rem;
-  margin-top:1.6rem;
-}
-
-.horario__linha{
-  display:flex;
-  align-items:center;
-  gap:.55rem;
-  background:var(--amarelo);
-  border:var(--traco-fino) solid var(--preto);
-  border-radius:4px;
-  box-shadow:var(--sombra-media);
-  padding:.5rem .8rem;
-  font-size:.78rem;
-  font-weight:700;
-}
-
-.horario__linha::before{
-  content:'';
-  flex:none;
-  width:8px;height:8px;
-  background:var(--preto);
-  transform:rotate(45deg);
-}
-
-.horario__dia{
-  font-size:.7rem;
-  font-weight:800;
-  font-stretch:78%;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-}
-
-/* ---------- filtros ---------- */
-
-.loja{padding:clamp(1.5rem,5vw,2.75rem) var(--margem) clamp(2.5rem,7vw,4rem)}
-
-.filtros{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.5rem;
-  margin-bottom:clamp(1.25rem,4vw,2rem);
-}
-
-.chip{
-  font-family:inherit;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:.45rem;
-  font-size:.72rem;
-  font-weight:800;
-  font-stretch:80%;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  padding:.55rem .85rem;
-  color:var(--preto);
-  background:var(--branco);
-  border:var(--traco-fino) solid var(--preto);
-  border-radius:4px;
-  transition:background-color .12s ease,box-shadow .12s ease,transform .12s ease;
-}
-
-.chip::before{
-  content:'';
-  flex:none;
-  width:8px;height:8px;
-  background:var(--preto);
-  transform:rotate(45deg);
-  opacity:0;
-  transition:opacity .12s ease;
-}
-
-.chip:hover{background:var(--azul-claro)}
-
-.chip[aria-pressed="true"]{
-  background:var(--amarelo);
-  box-shadow:var(--sombra-media);
-}
-
-.chip[aria-pressed="true"]:hover{background:var(--amarelo)}
-
-.chip[aria-pressed="true"]::before{opacity:1}
-
-/* ---------- grade ---------- */
-
-.grade{
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-  gap:clamp(.75rem,2.2vw,1.4rem);
-}
-
-.produto{
-  display:flex;
-  flex-direction:column;
-  gap:.35rem;
-  background:var(--branco);
-  border:var(--traco) solid var(--preto);
-  border-radius:6px;
-  box-shadow:var(--sombra);
-  padding:clamp(.65rem,2vw,1rem);
-  transition:transform .12s ease,box-shadow .12s ease;
-}
-
-.produto:hover{
-  transform:translate(-2px,-2px);
-  box-shadow:6px 6px 0 var(--preto);
-}
-
-.disco{
-  position:relative;
-  aspect-ratio:1;
-  padding:7%;
-  margin-bottom:.5rem;
-  border:var(--traco) solid var(--preto);
-  border-radius:50%;
-  background:var(--azul-moldura);
-}
-
-.disco__aro{
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  background:repeating-conic-gradient(from 0deg,var(--preto) 0deg 1.6deg,transparent 1.6deg 12deg);
-}
-
-.disco__foto,
-.disco__vazio{
-  position:relative;
-  z-index:1;
-  width:100%;
-  height:100%;
-  border:2px solid var(--preto);
-  border-radius:50%;
-  object-fit:cover;
-}
-
-.disco__vazio{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:var(--azul-claro);
-  color:var(--tinta-fraca);
-  font-size:.62rem;
-  font-weight:700;
-  font-stretch:78%;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-}
-
-/* miniaturas: só aparecem quando o produto tem mais de uma foto.
-   O estado escolhido é marcado de três jeitos ao mesmo tempo —
-   opacidade cheia, contorno preto mais grosso e anel amarelo —
-   pra não depender só da foto grande ter trocado. */
-.minis{
-  display:flex;
-  flex-wrap:wrap;
-  gap:5px;
-  margin-top:-.2rem;
-}
-
-.mini{
-  flex:none;
-  width:28px;
-  height:28px;
-  padding:0;
-  cursor:pointer;
-  overflow:hidden;
-  background:var(--azul-claro);
-  border:2px solid var(--borda-fraca);
-  border-radius:50%;
-  opacity:.55;
-  transition:opacity .12s ease,border-color .12s ease,box-shadow .12s ease;
-}
-
-.mini img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-.mini:hover{opacity:1}
-
-.mini[aria-pressed="true"]{
-  opacity:1;
-  border:3px solid var(--preto);
-  box-shadow:0 0 0 3px var(--amarelo);
-}
-
-/* afasta o anel de foco do anel amarelo de selecionado */
-.mini:focus-visible{outline-offset:5px}
-
-.produto--esgotado .mini img{filter:grayscale(1)}
-
-.produto__nome{
-  font-size:.95rem;
-  font-weight:800;
-  font-stretch:92%;
-  line-height:1.2;
-}
-
-.produto__medida{
+  flex:1;
+  min-width:0;
   color:var(--tinta-fraca);
   font-size:.68rem;
   font-weight:700;
@@ -402,132 +188,492 @@ h1,h2,h3,p{margin:0}
   letter-spacing:.1em;
 }
 
-.produto__preco{
-  font-size:1.3rem;
-  font-weight:900;
-  font-stretch:84%;
-  line-height:1.1;
-  margin-top:.15rem;
-}
-
-.produto__preco--consulta{
-  font-size:.85rem;
-  font-weight:700;
-  font-stretch:88%;
-  color:var(--tinta-fraca);
-  padding:.3rem 0;
-}
-
-.botao{
-  display:block;
-  width:100%;
-  margin-top:auto;
-  padding:.75rem .5rem;
-  text-align:center;
-  text-decoration:none;
+/* botão do carrinho no cabeçalho */
+.carrinho-botao{
+  flex:none;
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
   font-family:inherit;
-  font-size:.76rem;
+  font-size:.72rem;
   font-weight:800;
   font-stretch:82%;
   text-transform:uppercase;
   letter-spacing:.06em;
-  line-height:1.1;
+  cursor:pointer;
+  padding:.6rem .8rem;
   color:var(--preto);
-  background:var(--laranja);
-  border:var(--traco-fino) solid var(--preto);
-  border-radius:4px;
-  box-shadow:var(--sombra-media);
-  transition:transform .12s ease,box-shadow .12s ease;
+  background:var(--branco);
+  border:var(--traco) solid var(--preto);
+  border-radius:6px;
 }
 
-.botao:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--preto)}
+.carrinho-botao:hover{background:var(--papel)}
 
-.botao:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--preto)}
+.carrinho-botao__conta{
+  display:inline-grid;
+  place-items:center;
+  min-width:1.35rem;
+  height:1.35rem;
+  padding:0 .3rem;
+  font-size:.72rem;
+  background:var(--amarelo);
+  border:1.5px solid var(--preto);
+  border-radius:999px;
+}
 
-.esgotado{
-  margin-top:auto;
-  padding:.75rem .5rem;
-  text-align:center;
-  font-size:.7rem;
+.carrinho-botao[data-vazio="sim"] .carrinho-botao__conta{
+  background:var(--papel);
+  color:var(--tinta-fraca);
+}
+
+/* ---------- abertura ---------- */
+
+.abertura{padding-top:clamp(1.75rem,5vw,3rem);padding-bottom:clamp(1.25rem,3.5vw,2rem)}
+
+.abertura__titulo{
+  font-size:clamp(1.9rem,6.4vw,3.25rem);
+  font-weight:900;
+  font-stretch:86%;
+  line-height:1.03;
+  letter-spacing:-.02em;
+  max-width:18ch;
+}
+
+.abertura__linha{
+  margin-top:.7rem;
+  max-width:46ch;
+  color:var(--tinta-fraca);
+  font-size:clamp(.95rem,2.6vw,1.05rem);
+}
+
+.horario{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.15rem}
+
+.horario__linha{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.4rem .7rem;
+  font-size:.78rem;
+  font-weight:600;
+  background:var(--branco);
+  border:1.5px solid var(--borda);
+  border-radius:6px;
+}
+
+.horario__dia{
+  font-size:.66rem;
+  font-weight:800;
+  font-stretch:78%;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+  color:var(--tinta-fraca);
+}
+
+/* ---------- filtros ---------- */
+
+.loja{padding-bottom:clamp(2.5rem,6vw,4rem)}
+
+.filtros{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:clamp(1rem,3vw,1.5rem)}
+
+.chip{
+  font-family:inherit;
+  cursor:pointer;
+  font-size:.72rem;
   font-weight:800;
   font-stretch:80%;
   text-transform:uppercase;
   letter-spacing:.08em;
+  padding:.5rem .8rem;
+  color:var(--tinta-fraca);
+  background:var(--branco);
+  border:1.5px solid var(--borda);
+  border-radius:999px;
+  transition:background-color .12s ease,color .12s ease,border-color .12s ease;
+}
+
+.chip:hover{border-color:var(--preto);color:var(--preto)}
+
+.chip[aria-pressed="true"]{
+  color:var(--preto);
+  background:var(--amarelo);
+  border-color:var(--preto);
+}
+
+/* ---------- grade ---------- */
+
+/* colunas fixas por faixa. Nada de auto-fill: com poucos produtos
+   ele cria trilhas vazias e a página fica com um buraco à direita. */
+.grade{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(.7rem,2vw,1.25rem);
+}
+
+@media (min-width:600px){ .grade{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (min-width:900px){ .grade{grid-template-columns:repeat(4,minmax(0,1fr))} }
+
+.produto{
+  display:flex;
+  flex-direction:column;
+  background:var(--branco);
+  border:var(--traco) solid var(--preto);
+  border-radius:8px;
+  overflow:hidden;
+}
+
+/* foto + nome são a área que abre o produto. Fica fora do botão
+   Adicionar de propósito: botão dentro de botão quebra teclado. */
+.produto__abrir{
+  display:block;
+  width:100%;
+  padding:0;
+  text-align:left;
+  font:inherit;
+  color:inherit;
+  background:none;
+  border:0;
+  cursor:pointer;
+}
+
+.foto{
+  position:relative;
+  aspect-ratio:1;
+  background:var(--papel);
+  border-bottom:1.5px solid var(--borda);
+}
+
+.foto img{width:100%;height:100%;object-fit:cover}
+
+.foto__vazio{
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:100%;
+  color:var(--tinta-fraca);
+  font-size:.66rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.produto__nome{
+  padding:.7rem .75rem 0;
+  font-size:.92rem;
+  font-weight:700;
+  line-height:1.25;
+}
+
+.produto__abrir:hover .produto__nome{text-decoration:underline}
+
+.produto__medida{
+  padding:.2rem .75rem 0;
+  color:var(--tinta-fraca);
+  font-size:.68rem;
+  font-weight:700;
+  font-stretch:78%;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.produto__preco{
+  padding:.35rem .75rem 0;
+  font-size:1.05rem;
+  font-weight:900;
+  font-stretch:88%;
+}
+
+.produto__preco--consulta{font-size:.85rem;font-weight:700;color:var(--tinta-fraca)}
+
+.produto__rodape{margin-top:auto;padding:.7rem .75rem .75rem}
+
+.esgotado{
+  margin-top:auto;
+  margin:auto .75rem .75rem;
+  padding:.7rem .5rem;
+  text-align:center;
+  font-size:.7rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.06em;
   color:var(--tinta-fraca);
   background:var(--papel);
-  border:var(--traco-fino) dashed var(--borda-fraca);
-  border-radius:4px;
+  border:1.5px dashed var(--borda);
+  border-radius:6px;
 }
 
-.produto--esgotado .disco__foto,
-.produto--esgotado .disco__vazio{filter:grayscale(1);opacity:.5}
+.produto--esgotado .foto img{filter:grayscale(1);opacity:.55}
 
-.produto--esgotado .produto__preco{color:var(--tinta-fraca)}
+.grade__vazio{grid-column:1/-1;color:var(--tinta-fraca)}
 
-.grade__vazio{
-  grid-column:1/-1;
-  color:var(--tinta-fraca);
-  font-weight:500;
+/* ---------- miniaturas ---------- */
+
+.minis{display:flex;flex-wrap:wrap;gap:6px}
+
+.produto__minis{padding:.6rem .75rem 0}
+.produto__minis .mini{width:30px;height:30px}
+
+.mini{
+  flex:none;
+  width:38px;
+  height:38px;
+  padding:0;
+  overflow:hidden;
+  cursor:pointer;
+  background:var(--papel);
+  border:1.5px solid var(--borda);
+  border-radius:5px;
+  opacity:.6;
+  transition:opacity .12s ease,border-color .12s ease,box-shadow .12s ease;
 }
+
+.mini img{width:100%;height:100%;object-fit:cover}
+.mini:hover{opacity:1}
+
+.mini[aria-pressed="true"]{
+  opacity:1;
+  border:2px solid var(--preto);
+  box-shadow:0 0 0 2px var(--amarelo);
+}
+
+.mini:focus-visible{outline-offset:4px}
 
 /* ---------- rodapé ---------- */
 
 .rodape{
-  background:var(--laranja);
   border-top:var(--traco) solid var(--preto);
-  padding:clamp(2.25rem,7vw,4rem) var(--margem);
+  padding-top:clamp(2rem,5vw,3.25rem);
+  padding-bottom:clamp(2rem,5vw,3.25rem);
 }
 
-.rodape__titulo{
-  font-size:clamp(1.6rem,6.5vw,2.6rem);
-  font-weight:900;
-  font-stretch:82%;
-  text-transform:uppercase;
-  line-height:1;
-  letter-spacing:-.01em;
-}
-
-.rodape__linha{
-  margin-top:.85rem;
-  max-width:40ch;
-  font-weight:500;
-}
-
-.botao--grande{
-  width:auto;
-  max-width:24rem;
-  margin-top:1.5rem;
-  padding:1.05rem 1.5rem;
-  font-size:1rem;
-  letter-spacing:.05em;
-  background:var(--amarelo);
-  border-width:var(--traco);
-  box-shadow:5px 5px 0 var(--preto);
-}
-
-.botao--grande:hover{box-shadow:6px 6px 0 var(--preto)}
+.rodape__titulo{font-size:clamp(1.35rem,4.5vw,2rem);font-weight:900;font-stretch:86%;line-height:1.1}
+.rodape__linha{margin-top:.6rem;max-width:44ch;color:var(--tinta-fraca)}
+.rodape .botao{margin-top:1.2rem}
 
 .rodape__pe{
-  margin-top:2rem;
+  margin-top:1.75rem;
+  color:var(--tinta-fraca);
+  font-size:.68rem;
+  font-weight:700;
+  font-stretch:78%;
+  text-transform:uppercase;
+  letter-spacing:.09em;
+}
+
+/* ---------- barra fixa do pedido (celular) ---------- */
+
+.barra-pedido{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:45;
+  background:var(--branco);
+  border-top:var(--traco) solid var(--preto);
+  padding:.6rem var(--gutter);
+  padding-left:calc(var(--gutter) + env(safe-area-inset-left, 0px));
+  padding-right:calc(var(--gutter) + env(safe-area-inset-right, 0px));
+  /* o indicador de home do iPhone mora aqui embaixo */
+  padding-bottom:calc(.6rem + env(safe-area-inset-bottom, 0px));
+}
+
+.barra-pedido__botao{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.75rem;
+  width:100%;
+}
+
+.barra-pedido__qtd{font-size:.72rem;opacity:.85}
+
+/* espaço no fim da página pra barra não tampar o rodapé */
+body.com-barra{padding-bottom:calc(76px + env(safe-area-inset-bottom, 0px))}
+
+@media (min-width:900px){
+  .barra-pedido{display:none}
+  body.com-barra{padding-bottom:0}
+}
+
+/* ---------- modais ---------- */
+
+.modal{
+  width:min(560px, calc(100vw - 2rem));
+  max-width:100%;
+  max-height:85vh;
+  max-height:85dvh;
+  padding:0;
+  color:var(--tinta);
+  background:var(--branco);
+  border:var(--traco) solid var(--preto);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.modal::backdrop{background:rgba(10,10,11,.62)}
+
+.modal[open]{display:flex;flex-direction:column}
+
+.modal__topo{
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:.8rem 1rem;
+  border-bottom:1.5px solid var(--borda);
+}
+
+.modal__titulo{font-size:.72rem;font-weight:800;font-stretch:80%;text-transform:uppercase;letter-spacing:.1em}
+
+.fechar{
+  flex:none;
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  font-family:inherit;
+  font-size:1.1rem;
+  line-height:1;
+  cursor:pointer;
+  background:var(--branco);
+  border:1.5px solid var(--borda);
+  border-radius:6px;
+}
+
+.fechar:hover{border-color:var(--preto)}
+
+.modal__rolagem{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1rem}
+
+.modal__base{
+  flex:none;
+  padding:.85rem 1rem;
+  border-top:1.5px solid var(--borda);
+  padding-bottom:calc(.85rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* no celular vira folha encostada embaixo, no alcance do polegar */
+@media (max-width:599px){
+  .modal{
+    width:100%;
+    max-width:100%;
+    max-height:92dvh;
+    margin:auto auto 0;
+    border-radius:12px 12px 0 0;
+    border-bottom:0;
+  }
+}
+
+/* --- conteúdo do modal de produto --- */
+
+.ficha__foto{
+  aspect-ratio:1;
+  max-height:46dvh;
+  margin-inline:auto;
+  background:var(--papel);
+  border:1.5px solid var(--borda);
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.ficha__foto img{width:100%;height:100%;object-fit:cover}
+
+.ficha .minis{margin-top:.7rem}
+
+.ficha__nome{margin-top:.9rem;font-size:1.15rem;font-weight:800;line-height:1.25}
+
+.ficha__medida{
+  margin-top:.25rem;
+  color:var(--tinta-fraca);
   font-size:.7rem;
   font-weight:700;
   font-stretch:78%;
   text-transform:uppercase;
-  letter-spacing:.12em;
+  letter-spacing:.08em;
+}
+
+.ficha__opcao{margin-top:.6rem;font-size:.85rem}
+.ficha__opcao b{font-weight:800}
+
+.ficha__preco{margin-top:.5rem;font-size:1.25rem;font-weight:900;font-stretch:88%}
+.ficha__preco--consulta{font-size:.95rem;font-weight:700;color:var(--tinta-fraca)}
+
+.ficha__alt{margin-top:.7rem;color:var(--tinta-fraca);font-size:.8rem}
+
+/* --- quantidade --- */
+
+.qtd{display:flex;align-items:center;gap:.6rem}
+
+.qtd__botao{
+  display:grid;
+  place-items:center;
+  width:38px;
+  height:38px;
+  font-family:inherit;
+  font-size:1.15rem;
+  line-height:1;
+  cursor:pointer;
+  background:var(--branco);
+  border:1.5px solid var(--preto);
+  border-radius:6px;
+}
+
+.qtd__botao:hover{background:var(--papel)}
+.qtd__botao:disabled{opacity:.35;cursor:default}
+.qtd__valor{min-width:2ch;text-align:center;font-weight:800;font-size:1rem}
+
+.ficha__acao{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.ficha__acao .botao{flex:1;min-width:11rem}
+
+/* --- lista do carrinho --- */
+
+.pedido{display:flex;flex-direction:column;gap:.85rem}
+
+.pedido__item{display:flex;gap:.75rem;align-items:flex-start}
+
+.pedido__foto{
+  flex:none;
+  width:62px;
+  height:62px;
+  background:var(--papel);
+  border:1.5px solid var(--borda);
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.pedido__foto img{width:100%;height:100%;object-fit:cover}
+.pedido__dados{flex:1;min-width:0}
+.pedido__nome{font-size:.92rem;font-weight:700;line-height:1.25}
+
+.pedido__detalhe{
+  margin-top:.15rem;
+  color:var(--tinta-fraca);
+  font-size:.7rem;
+  font-weight:700;
+  font-stretch:78%;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+
+.pedido__controles{display:flex;align-items:center;gap:.9rem;margin-top:.5rem;flex-wrap:wrap}
+
+.pedido__vazio{color:var(--tinta-fraca);text-align:center;padding:1.5rem 0}
+
+.pedido__aviso{
+  margin-bottom:.7rem;
+  color:var(--tinta-fraca);
+  font-size:.78rem;
+  line-height:1.4;
 }
 
 /* ---------- movimento ---------- */
-
-@keyframes girar{to{transform:rotate(360deg)}}
-
-.produto:hover .disco__aro,
-.produto:focus-within .disco__aro{animation:girar 4s linear infinite}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation-duration:.01ms !important;
     animation-iteration-count:1 !important;
     transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
   }
 }
 </style>
@@ -536,18 +682,23 @@ h1,h2,h3,p{margin:0}
 <body>
 
 <header class="topo">
-  <div class="marca">
-    <img id="logo" class="marca__logo" src="fotos/logo.jpg" alt="França Pipas" width="640" height="640">
-    <span id="marca-texto" class="marca__texto" hidden>França Pipas</span>
+  <div class="conteudo topo__interno">
+    <div class="marca">
+      <img id="logo" class="marca__logo" src="fotos/logo.jpg" alt="França Pipas" width="640" height="640">
+      <span id="marca-texto" class="marca__texto" hidden>França Pipas</span>
+    </div>
+    <p class="topo__local">Francisco Morato · SP</p>
+    <button type="button" class="carrinho-botao" id="abrir-carrinho" data-vazio="sim">
+      Pedido <span class="carrinho-botao__conta" id="conta-topo">0</span>
+    </button>
   </div>
-  <p class="topo__local">Francisco Morato · SP</p>
 </header>
 
 <main>
   <section class="abertura">
-    <div class="abertura__moldura">
-      <h1 class="abertura__titulo">Material que <span>aguenta raia</span></h1>
-      <p class="abertura__linha">Escolhe aqui e chama no WhatsApp — o pedido já vai escrito. Atendemos varejo e atacado.</p>
+    <div class="conteudo">
+      <h1 class="abertura__titulo">Carretilha, pipa e linha</h1>
+      <p class="abertura__linha">Atendemos varejo e atacado. Escolhe aqui, monta o pedido e manda no WhatsApp.</p>
       <div class="horario">
         <p class="horario__linha"><span class="horario__dia">Seg a sáb</span> 11h às 18h</p>
         <p class="horario__linha"><span class="horario__dia">Domingo</span> 10h às 16h</p>
@@ -556,19 +707,49 @@ h1,h2,h3,p{margin:0}
   </section>
 
   <section class="loja" aria-labelledby="titulo-loja">
-    <h2 id="titulo-loja" class="so-leitor">Produtos</h2>
-    <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoria"></div>
-    <p class="so-leitor" role="status" id="contagem"></p>
-    <ul class="grade" id="grade"></ul>
+    <div class="conteudo">
+      <h2 id="titulo-loja" class="so-leitor">Produtos</h2>
+      <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoria"></div>
+      <p class="so-leitor" role="status" id="aviso"></p>
+      <ul class="grade" id="grade"></ul>
+    </div>
   </section>
 </main>
 
 <footer class="rodape">
-  <h2 class="rodape__titulo">Não achou o que queria?</h2>
-  <p class="rodape__linha">Manda mensagem falando o que você procura. Se for pra revender, chama também.</p>
-  <a class="botao botao--grande" id="zap-geral" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
-  <p class="rodape__pe">França Pipas · Atacado e varejo · Francisco Morato, SP</p>
+  <div class="conteudo">
+    <h2 class="rodape__titulo">Não achou o que queria?</h2>
+    <p class="rodape__linha">Manda mensagem falando o que você procura. Se for pra revender, chama também.</p>
+    <a class="botao botao--amarelo botao--grande" id="zap-geral" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+    <p class="rodape__pe">França Pipas · Atacado e varejo · Francisco Morato, SP</p>
+  </div>
 </footer>
+
+<!-- barra que só aparece no celular quando já tem item no pedido -->
+<div class="barra-pedido" id="barra-pedido" hidden>
+  <button type="button" class="botao botao--bloco barra-pedido__botao" id="abrir-carrinho-barra">
+    <span class="barra-pedido__qtd" id="conta-barra">0 itens</span>
+    <span>Ver pedido</span>
+  </button>
+</div>
+
+<dialog class="modal" id="modal-produto" aria-labelledby="ficha-nome">
+  <div class="modal__topo">
+    <p class="modal__titulo">Produto</p>
+    <button type="button" class="fechar" data-fechar aria-label="Fechar">&times;</button>
+  </div>
+  <div class="modal__rolagem ficha" id="ficha"></div>
+  <div class="modal__base" id="ficha-base"></div>
+</dialog>
+
+<dialog class="modal" id="modal-carrinho" aria-labelledby="pedido-titulo">
+  <div class="modal__topo">
+    <p class="modal__titulo" id="pedido-titulo">Seu pedido</p>
+    <button type="button" class="fechar" data-fechar aria-label="Fechar">&times;</button>
+  </div>
+  <div class="modal__rolagem" id="pedido-lista"></div>
+  <div class="modal__base" id="pedido-base"></div>
+</dialog>
 
 <script>
 /* ============================================================
@@ -610,8 +791,8 @@ const NUMERO = '5511954871911';
    COMO FUNCIONA A LISTA DE FOTOS
 
    A PRIMEIRA foto é a que aparece grande quando o card abre.
-   Se tiver mais de uma, aparecem bolinhas embaixo pra trocar.
-   Com uma foto só, nenhuma bolinha aparece.
+   Se tiver mais de uma, aparecem quadradinhos pra trocar.
+   Com uma foto só, nenhum quadradinho aparece.
 
    Cada foto tem até três coisas:
 
@@ -623,11 +804,10 @@ const NUMERO = '5511954871911';
                             o cubo de madeira'. Se deixar de
                             fora, o site usa o nome do produto.
      opcao    só quando a foto é uma VARIAÇÃO à venda, tipo cor.
-                            O que estiver escrito aqui entra na
-                            mensagem do WhatsApp: opcao 'azul'
-                            vira "...na cor azul".
-                            NÃO use em foto que é só outro
-                            ângulo do mesmo produto.
+                            O que estiver escrito aqui entra no
+                            pedido: opcao 'azul' vira "na cor
+                            azul". NÃO use em foto que é só
+                            outro ângulo do mesmo produto.
    ============================================================ */
 const PRODUTOS = [
   {
@@ -699,9 +879,20 @@ const PRODUTOS = [
 
 /* ===== daqui pra baixo é o funcionamento da página ===== */
 
-const filtros = document.getElementById('filtros');
-const grade = document.getElementById('grade');
-const contagem = document.getElementById('contagem');
+const filtros   = document.getElementById('filtros');
+const grade     = document.getElementById('grade');
+const aviso     = document.getElementById('aviso');
+const contaTopo = document.getElementById('conta-topo');
+const contaBarra= document.getElementById('conta-barra');
+const barra     = document.getElementById('barra-pedido');
+const botaoTopo = document.getElementById('abrir-carrinho');
+
+const modalProduto  = document.getElementById('modal-produto');
+const modalCarrinho = document.getElementById('modal-carrinho');
+
+/* o carrinho vive só na memória da página: recarregou, esvaziou.
+   É de propósito — o projeto não usa localStorage nem sessionStorage. */
+const CARRINHO = [];
 
 function precoEmReais(valor){
   if (valor === null || valor === undefined) return null;
@@ -716,16 +907,6 @@ function linkWhats(mensagem){
   return 'https://wa.me/' + NUMERO + '?text=' + encodeURIComponent(mensagem);
 }
 
-function mensagemDoProduto(produto, foto){
-  const preco = precoEmReais(produto.preco);
-  const medida = produto.medida ? ', ' + produto.medida : '';
-  const cor = (foto && foto.opcao) ? ', na cor ' + foto.opcao : '';
-  const alvo = produto.nome + medida + cor;
-  return preco
-    ? 'Olá! Vi no site e quero ' + alvo + ' (' + preco + '). Ainda tem?'
-    : 'Olá! Vi no site e quero ' + alvo + '. Qual o valor?';
-}
-
 // alt escrito no array vence; sem ele, sobra o nome do produto
 function altDaFoto(produto, foto){
   if (foto && foto.alt) return foto.alt;
@@ -733,70 +914,68 @@ function altDaFoto(produto, foto){
   return produto.nome + (produto.medida ? ', ' + produto.medida : '');
 }
 
-function discoVazio(){
-  const vazio = document.createElement('span');
-  vazio.className = 'disco__vazio';
-  vazio.textContent = 'sem foto';
-  return vazio;
+// "Carretilha crua de madeira" / "Pipa ..., Kit com 5 ou 10, na cor azul"
+function descricao(produto, opcao){
+  return produto.nome +
+    (produto.medida ? ', ' + produto.medida : '') +
+    (opcao ? ', na cor ' + opcao : '');
 }
 
-function montaCard(produto){
-  const card = document.createElement('li');
-  card.className = 'produto' + (produto.estoque ? '' : ' produto--esgotado');
+function fotoVazia(){
+  const v = document.createElement('span');
+  v.className = 'foto__vazio';
+  v.textContent = 'sem foto';
+  return v;
+}
 
+/* monta um quadro de foto que troca de imagem, com os quadradinhos.
+   Usado tanto no card quanto no modal. Devolve o que o chamador
+   precisa pra saber qual foto está escolhida. */
+function montaGaleria(produto, opcoes){
+  const cfg = opcoes || {};
   const fotos = produto.fotos || [];
   const minis = [];
-  let principal = null;
+  let indice = 0;
+  let img = null;
   let vazio = null;
-  let botao = null;
 
-  // troca a foto grande, marca a miniatura escolhida e refaz o link
-  // do WhatsApp (a cor escolhida entra na mensagem)
-  function escolherFoto(i){
-    const foto = fotos[i];
-    if (principal) {
-      if (vazio) { vazio.remove(); vazio = null; }
-      principal.hidden = false;
-      principal.src = foto.arquivo;
-      principal.alt = altDaFoto(produto, foto);
-    }
-    for (let j = 0; j < minis.length; j++) {
-      minis[j].setAttribute('aria-pressed', String(j === i));
-    }
-    if (botao) botao.href = linkWhats(mensagemDoProduto(produto, foto));
-  }
-
-  // ---- disco principal ----
-  const disco = document.createElement('div');
-  disco.className = 'disco';
-
-  const aro = document.createElement('span');
-  aro.className = 'disco__aro';
-  aro.setAttribute('aria-hidden', 'true');
-  disco.appendChild(aro);
+  const quadro = document.createElement('div');
+  quadro.className = cfg.classe || 'foto';
 
   if (fotos.length) {
-    principal = document.createElement('img');
-    principal.className = 'disco__foto';
-    principal.loading = 'lazy';
-    // arquivo faltando ou nome errado: mostra o disco vazio no lugar,
-    // sem quebrar o card, e volta sozinho se outra foto carregar
-    principal.addEventListener('error', function(){
-      principal.hidden = true;
-      if (!vazio) { vazio = discoVazio(); disco.appendChild(vazio); }
+    img = document.createElement('img');
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.width = 450;
+    img.height = 450;
+    img.addEventListener('error', function(){
+      img.hidden = true;
+      if (!vazio) { vazio = fotoVazia(); quadro.appendChild(vazio); }
     });
-    disco.appendChild(principal);
+    quadro.appendChild(img);
   } else {
-    disco.appendChild(discoVazio());
+    quadro.appendChild(fotoVazia());
   }
-  card.appendChild(disco);
 
-  // ---- miniaturas, só com mais de uma foto ----
+  function escolher(i){
+    indice = i;
+    const foto = fotos[i];
+    if (img) {
+      if (vazio) { vazio.remove(); vazio = null; }
+      img.hidden = false;
+      img.src = foto.arquivo;
+      img.alt = altDaFoto(produto, foto);
+    }
+    minis.forEach(function(m, j){ m.setAttribute('aria-pressed', String(j === i)); });
+    if (cfg.aoTrocar) cfg.aoTrocar(i, foto);
+  }
+
+  let tira = null;
   if (fotos.length > 1) {
-    const tira = document.createElement('div');
+    tira = document.createElement('div');
     tira.className = 'minis';
     tira.setAttribute('role', 'group');
-    tira.setAttribute('aria-label', 'Fotos de ' + produto.nome);
+    tira.setAttribute('aria-label', (fotos[0].opcao ? 'Cores' : 'Fotos') + ' de ' + produto.nome);
 
     fotos.forEach(function(foto, i){
       const mini = document.createElement('button');
@@ -807,25 +986,58 @@ function montaCard(produto){
         ? 'Cor ' + foto.opcao
         : 'Foto ' + (i + 1) + ' de ' + fotos.length);
 
-      const img = document.createElement('img');
-      img.src = foto.arquivo;
-      img.alt = '';               // o rótulo do botão já descreve
-      img.loading = 'lazy';
-      mini.appendChild(img);
+      const m = document.createElement('img');
+      m.src = foto.arquivo;
+      m.alt = '';
+      m.loading = 'lazy';
+      mini.appendChild(m);
 
-      mini.addEventListener('click', function(){ escolherFoto(i); });
+      mini.addEventListener('click', function(){ escolher(i); });
       tira.appendChild(mini);
       minis.push(mini);
     });
-    card.appendChild(tira);
   }
+
+  if (fotos.length) escolher(0);
+
+  return {
+    quadro: quadro,
+    tira: tira,
+    fotoAtual: function(){ return fotos[indice] || null; },
+    escolher: escolher
+  };
+}
+
+/* ---------------- card da grade ---------------- */
+
+function montaCard(produto, indice){
+  const card = document.createElement('li');
+  card.className = 'produto' + (produto.estoque ? '' : ' produto--esgotado');
+
+  const galeria = montaGaleria(produto);
+
+  const abrir = document.createElement('button');
+  abrir.type = 'button';
+  abrir.className = 'produto__abrir';
+  abrir.setAttribute('aria-label', 'Ver ' + produto.nome);
+  abrir.appendChild(galeria.quadro);
 
   const nome = document.createElement('h3');
   nome.className = 'produto__nome';
   nome.textContent = produto.nome;
-  card.appendChild(nome);
+  abrir.appendChild(nome);
+  abrir.addEventListener('click', function(){ abrirProduto(indice); });
+  card.appendChild(abrir);
 
-  // sem medida, a linha nem é criada
+  // a tira fica FORA do botão que abre o produto: botão dentro de
+  // botão não é HTML válido e quebra teclado e leitor de tela
+  if (galeria.tira) {
+    const cx = document.createElement('div');
+    cx.className = 'produto__minis';
+    cx.appendChild(galeria.tira);
+    card.appendChild(cx);
+  }
+
   if (produto.medida) {
     const medida = document.createElement('p');
     medida.className = 'produto__medida';
@@ -840,12 +1052,20 @@ function montaCard(produto){
   card.appendChild(linhaPreco);
 
   if (produto.estoque) {
-    botao = document.createElement('a');
-    botao.className = 'botao';
-    botao.target = '_blank';
-    botao.rel = 'noopener';
-    botao.textContent = 'Pedir no WhatsApp';
-    card.appendChild(botao);
+    const rodape = document.createElement('div');
+    rodape.className = 'produto__rodape';
+    const bt = document.createElement('button');
+    bt.type = 'button';
+    bt.className = 'botao botao--bloco';
+    bt.textContent = 'Adicionar';
+    bt.setAttribute('aria-label', 'Adicionar ' + produto.nome + ' ao pedido');
+    // adiciona a foto que estiver escolhida na tira — se o card deixa
+    // escolher a cor, o botão tem que respeitar a escolha
+    bt.addEventListener('click', function(){
+      adicionar(produto, galeria.fotoAtual(), 1);
+    });
+    rodape.appendChild(bt);
+    card.appendChild(rodape);
   } else {
     const esgotado = document.createElement('p');
     esgotado.className = 'esgotado';
@@ -853,31 +1073,323 @@ function montaCard(produto){
     card.appendChild(esgotado);
   }
 
-  if (fotos.length) escolherFoto(0);
-  else if (botao) botao.href = linkWhats(mensagemDoProduto(produto, null));
-
   return card;
 }
 
+/* ---------------- modal do produto ---------------- */
+
+let ultimoFoco = null;
+
+function abrirProduto(indice){
+  const produto = PRODUTOS[indice];
+  const ficha = document.getElementById('ficha');
+  const base  = document.getElementById('ficha-base');
+  ficha.replaceChildren();
+  base.replaceChildren();
+
+  let quantidade = 1;
+
+  const linhaOpcao = document.createElement('p');
+  linhaOpcao.className = 'ficha__opcao';
+
+  const legenda = document.createElement('p');
+  legenda.className = 'ficha__alt';
+
+  const galeria = montaGaleria(produto, {
+    classe: 'ficha__foto',
+    aoTrocar: function(i, foto){
+      if (foto && foto.opcao) {
+        linhaOpcao.replaceChildren();
+        linhaOpcao.append('Cor: ');
+        const b = document.createElement('b');
+        b.textContent = foto.opcao;
+        linhaOpcao.appendChild(b);
+      }
+      legenda.textContent = altDaFoto(produto, foto);
+    }
+  });
+
+  ficha.appendChild(galeria.quadro);
+  if (galeria.tira) ficha.appendChild(galeria.tira);
+
+  const nome = document.createElement('h2');
+  nome.className = 'ficha__nome';
+  nome.id = 'ficha-nome';
+  nome.textContent = produto.nome;
+  ficha.appendChild(nome);
+
+  if (produto.medida) {
+    const medida = document.createElement('p');
+    medida.className = 'ficha__medida';
+    medida.textContent = produto.medida;
+    ficha.appendChild(medida);
+  }
+
+  if (linhaOpcao.textContent) ficha.appendChild(linhaOpcao);
+
+  const preco = precoEmReais(produto.preco);
+  const linhaPreco = document.createElement('p');
+  linhaPreco.className = 'ficha__preco' + (preco ? '' : ' ficha__preco--consulta');
+  linhaPreco.textContent = preco ? preco : 'Sob consulta — o valor fecha na conversa';
+  ficha.appendChild(linhaPreco);
+
+  ficha.appendChild(legenda);
+
+  // ---- base: quantidade + adicionar ----
+  if (produto.estoque) {
+    const acao = document.createElement('div');
+    acao.className = 'ficha__acao';
+
+    const cx = document.createElement('div');
+    cx.className = 'qtd';
+
+    const menos = document.createElement('button');
+    menos.type = 'button';
+    menos.className = 'qtd__botao';
+    menos.textContent = '−';
+    menos.setAttribute('aria-label', 'Diminuir quantidade');
+
+    const valor = document.createElement('span');
+    valor.className = 'qtd__valor';
+    valor.setAttribute('aria-live', 'polite');
+    valor.textContent = '1';
+
+    const mais = document.createElement('button');
+    mais.type = 'button';
+    mais.className = 'qtd__botao';
+    mais.textContent = '+';
+    mais.setAttribute('aria-label', 'Aumentar quantidade');
+
+    function pinta(){
+      valor.textContent = String(quantidade);
+      menos.disabled = quantidade <= 1;
+    }
+    menos.addEventListener('click', function(){ if (quantidade > 1) { quantidade--; pinta(); } });
+    mais.addEventListener('click', function(){ if (quantidade < 99) { quantidade++; pinta(); } });
+    pinta();
+
+    cx.append(menos, valor, mais);
+
+    const bt = document.createElement('button');
+    bt.type = 'button';
+    bt.className = 'botao';
+    bt.textContent = 'Adicionar ao pedido';
+    bt.addEventListener('click', function(){
+      adicionar(produto, galeria.fotoAtual(), quantidade);
+      modalProduto.close();
+    });
+
+    acao.append(cx, bt);
+    base.appendChild(acao);
+  } else {
+    const p = document.createElement('p');
+    p.className = 'esgotado';
+    p.style.margin = '0';
+    p.textContent = 'Esgotado no momento';
+    base.appendChild(p);
+  }
+
+  ultimoFoco = document.activeElement;
+  modalProduto.showModal();
+}
+
+/* ---------------- carrinho ---------------- */
+
+function chave(produto, foto){
+  return produto.nome + '||' + (foto && foto.opcao ? foto.opcao : '');
+}
+
+function adicionar(produto, foto, quantidade){
+  const k = chave(produto, foto);
+  const achado = CARRINHO.find(function(i){ return i.chave === k; });
+  if (achado) {
+    achado.qtd = Math.min(99, achado.qtd + quantidade);
+  } else {
+    CARRINHO.push({
+      chave: k,
+      produto: produto,
+      opcao: (foto && foto.opcao) ? foto.opcao : '',
+      arquivo: foto ? foto.arquivo : '',
+      alt: foto ? altDaFoto(produto, foto) : produto.nome,
+      qtd: quantidade
+    });
+  }
+  atualizarCarrinho();
+}
+
+function totalItens(){
+  return CARRINHO.reduce(function(s, i){ return s + i.qtd; }, 0);
+}
+
+function mensagemDoPedido(){
+  const linhas = CARRINHO.map(function(i){
+    const preco = precoEmReais(i.produto.preco);
+    return '• ' + i.qtd + 'x ' + descricao(i.produto, i.opcao) +
+           (preco ? ' — ' + preco + ' cada' : '');
+  });
+  const faltaPreco = CARRINHO.some(function(i){ return i.produto.preco === null; });
+  return 'Olá! Vi no site e quero fazer um pedido:\n\n' +
+         linhas.join('\n') + '\n\n' +
+         (faltaPreco ? 'Qual fica o valor?' : 'Ainda tem tudo?');
+}
+
+function atualizarCarrinho(){
+  const n = totalItens();
+  contaTopo.textContent = String(n);
+  botaoTopo.dataset.vazio = n ? 'nao' : 'sim';
+  botaoTopo.setAttribute('aria-label', n
+    ? 'Ver pedido, ' + n + (n === 1 ? ' item' : ' itens')
+    : 'Ver pedido, vazio');
+
+  contaBarra.textContent = n + (n === 1 ? ' item' : ' itens');
+  barra.hidden = n === 0;
+  document.body.classList.toggle('com-barra', n > 0);
+
+  aviso.textContent = n
+    ? n + (n === 1 ? ' item no pedido' : ' itens no pedido')
+    : 'Pedido vazio';
+
+  if (modalCarrinho.open) pintaCarrinho();
+}
+
+function pintaCarrinho(){
+  const lista = document.getElementById('pedido-lista');
+  const base  = document.getElementById('pedido-base');
+  lista.replaceChildren();
+  base.replaceChildren();
+
+  if (!CARRINHO.length) {
+    const p = document.createElement('p');
+    p.className = 'pedido__vazio';
+    p.textContent = 'Seu pedido está vazio. Toque em Adicionar num produto.';
+    lista.appendChild(p);
+    return;
+  }
+
+  const ul = document.createElement('ul');
+  ul.className = 'pedido';
+
+  CARRINHO.forEach(function(item){
+    const li = document.createElement('li');
+    li.className = 'pedido__item';
+
+    const cx = document.createElement('div');
+    cx.className = 'pedido__foto';
+    if (item.arquivo) {
+      const img = document.createElement('img');
+      img.src = item.arquivo;
+      img.alt = '';
+      img.loading = 'lazy';
+      cx.appendChild(img);
+    }
+    li.appendChild(cx);
+
+    const dados = document.createElement('div');
+    dados.className = 'pedido__dados';
+
+    const nome = document.createElement('p');
+    nome.className = 'pedido__nome';
+    nome.textContent = item.produto.nome;
+    dados.appendChild(nome);
+
+    const detalhe = [item.produto.medida, item.opcao ? 'cor ' + item.opcao : '']
+      .filter(Boolean).join(' · ');
+    if (detalhe) {
+      const d = document.createElement('p');
+      d.className = 'pedido__detalhe';
+      d.textContent = detalhe;
+      dados.appendChild(d);
+    }
+
+    const controles = document.createElement('div');
+    controles.className = 'pedido__controles';
+
+    const qtd = document.createElement('div');
+    qtd.className = 'qtd';
+
+    const menos = document.createElement('button');
+    menos.type = 'button';
+    menos.className = 'qtd__botao';
+    menos.textContent = '−';
+    menos.setAttribute('aria-label', 'Diminuir quantidade de ' + item.produto.nome);
+    menos.disabled = item.qtd <= 1;
+    menos.addEventListener('click', function(){
+      if (item.qtd > 1) { item.qtd--; atualizarCarrinho(); }
+    });
+
+    const valor = document.createElement('span');
+    valor.className = 'qtd__valor';
+    valor.textContent = String(item.qtd);
+
+    const mais = document.createElement('button');
+    mais.type = 'button';
+    mais.className = 'qtd__botao';
+    mais.textContent = '+';
+    mais.setAttribute('aria-label', 'Aumentar quantidade de ' + item.produto.nome);
+    mais.addEventListener('click', function(){
+      if (item.qtd < 99) { item.qtd++; atualizarCarrinho(); }
+    });
+
+    qtd.append(menos, valor, mais);
+    controles.appendChild(qtd);
+
+    const tirar = document.createElement('button');
+    tirar.type = 'button';
+    tirar.className = 'botao-simples';
+    tirar.textContent = 'Remover';
+    tirar.setAttribute('aria-label', 'Remover ' + item.produto.nome + ' do pedido');
+    tirar.addEventListener('click', function(){
+      const i = CARRINHO.indexOf(item);
+      if (i >= 0) CARRINHO.splice(i, 1);
+      atualizarCarrinho();
+    });
+    controles.appendChild(tirar);
+
+    dados.appendChild(controles);
+    li.appendChild(dados);
+    ul.appendChild(li);
+  });
+
+  lista.appendChild(ul);
+
+  const nota = document.createElement('p');
+  nota.className = 'pedido__aviso';
+  nota.textContent = 'O valor não fecha aqui. A gente responde no WhatsApp com o preço.';
+  base.appendChild(nota);
+
+  const enviar = document.createElement('a');
+  enviar.className = 'botao botao--bloco botao--grande';
+  enviar.href = linkWhats(mensagemDoPedido());
+  enviar.target = '_blank';
+  enviar.rel = 'noopener';
+  enviar.textContent = 'Enviar pedido no WhatsApp';
+  base.appendChild(enviar);
+}
+
+function abrirCarrinho(){
+  ultimoFoco = document.activeElement;
+  pintaCarrinho();
+  modalCarrinho.showModal();
+}
+
+/* ---------------- filtros e grade ---------------- */
+
 function mostrar(categoria){
-  const lista = categoria === 'Tudo'
-    ? PRODUTOS
-    : PRODUTOS.filter(function(p){ return p.categoria === categoria; });
+  const lista = [];
+  PRODUTOS.forEach(function(p, i){
+    if (categoria === 'Tudo' || p.categoria === categoria) lista.push([p, i]);
+  });
 
   grade.replaceChildren();
 
-  if (lista.length === 0) {
+  if (!lista.length) {
     const vazio = document.createElement('li');
     vazio.className = 'grade__vazio';
     vazio.textContent = 'Nada nessa categoria por enquanto.';
     grade.appendChild(vazio);
   } else {
-    lista.forEach(function(p){ grade.appendChild(montaCard(p)); });
+    lista.forEach(function(par){ grade.appendChild(montaCard(par[0], par[1])); });
   }
-
-  contagem.textContent = lista.length === 1
-    ? '1 produto'
-    : lista.length + ' produtos';
 
   filtros.querySelectorAll('.chip').forEach(function(chip){
     chip.setAttribute('aria-pressed', String(chip.dataset.categoria === categoria));
@@ -888,7 +1400,6 @@ function montaFiltros(){
   const categorias = ['Tudo'].concat(
     Array.from(new Set(PRODUTOS.map(function(p){ return p.categoria; })))
   );
-
   categorias.forEach(function(categoria){
     const chip = document.createElement('button');
     chip.type = 'button';
@@ -901,20 +1412,32 @@ function montaFiltros(){
   });
 }
 
+/* ---------------- ligações ---------------- */
+
 function ajustaLogo(){
   const logo = document.getElementById('logo');
   const texto = document.getElementById('marca-texto');
-  function semLogo(){
-    logo.hidden = true;
-    texto.hidden = false;
-  }
+  function semLogo(){ logo.hidden = true; texto.hidden = false; }
   logo.addEventListener('error', semLogo);
   if (logo.complete && logo.naturalWidth === 0) semLogo();
 }
 
+// fechar: botão X, clique no fundo escuro, e Esc (nativo do <dialog>)
+[modalProduto, modalCarrinho].forEach(function(m){
+  m.querySelector('[data-fechar]').addEventListener('click', function(){ m.close(); });
+  m.addEventListener('click', function(e){ if (e.target === m) m.close(); });
+  m.addEventListener('close', function(){
+    if (ultimoFoco && document.contains(ultimoFoco)) ultimoFoco.focus();
+  });
+});
+
+document.getElementById('abrir-carrinho').addEventListener('click', abrirCarrinho);
+document.getElementById('abrir-carrinho-barra').addEventListener('click', abrirCarrinho);
+
 ajustaLogo();
 montaFiltros();
 mostrar('Tudo');
+atualizarCarrinho();
 document.getElementById('zap-geral').href =
   linkWhats('Olá! Vi o site da França Pipas e queria perguntar sobre um produto.');
 </script>
