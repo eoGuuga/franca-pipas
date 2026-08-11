@@ -133,6 +133,8 @@ button,a,summary,label{touch-action:manipulation}
 .botao:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--preto)}
 .botao--bloco{width:100%}
 .botao--amarelo{background:var(--amarelo)}
+.botao--claro{background:var(--branco)}
+.botao--claro:hover{background:var(--papel)}
 .botao--grande{font-size:1rem;padding:1rem 1.4rem}
 
 .botao-simples{
@@ -153,6 +155,26 @@ button,a,summary,label{touch-action:manipulation}
 
 /* ---------- topo ---------- */
 
+/* faixa fina de informação da loja. Só coisa que é verdade:
+   quem ela atende e a que horas abre. */
+.faixa{
+  background:var(--azul-fundo);
+  border-bottom:1px solid rgba(255,255,255,.15);
+  padding-top:env(safe-area-inset-top, 0px);
+}
+
+.faixa__texto{
+  padding-top:.4rem;
+  padding-bottom:.4rem;
+  text-align:center;
+  color:var(--tinta-clara);
+  font-size:.6rem;
+  font-weight:700;
+  font-stretch:76%;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+
 /* faixa azul da marca. A ordem campo escuro -> régua de azul vivo
    -> linha preta é a mesma construção da moldura da logo, e faz o
    fundo próprio dela sumir dentro do cabeçalho. */
@@ -161,7 +183,6 @@ button,a,summary,label{touch-action:manipulation}
   background:var(--azul-fundo);
   border-bottom:4px solid var(--azul-vivo);
   box-shadow:0 2px 0 var(--preto);
-  padding-top:env(safe-area-inset-top, 0px);
 }
 
 /* gruda só no desktop: no celular quem dá acesso ao pedido é a
@@ -222,6 +243,10 @@ button,a,summary,label{touch-action:manipulation}
 
 .carrinho-botao:hover{background:var(--amarelo)}
 
+/* no celular quem dá acesso ao pedido é a barra de baixo;
+   dois botões pra mesma coisa só ocupam espaço */
+@media (max-width:899px){ .carrinho-botao{display:none} }
+
 /* sobre a faixa azul o foco preto some; aqui ele vira branco */
 .topo :focus-visible{outline-color:var(--branco)}
 
@@ -244,7 +269,8 @@ button,a,summary,label{touch-action:manipulation}
 
 /* ---------- abertura ---------- */
 
-.abertura{padding-top:clamp(1.75rem,5vw,3rem);padding-bottom:clamp(1.25rem,3.5vw,2rem)}
+/* abertura curta de propósito: o produto tem que aparecer cedo */
+.abertura{padding-top:clamp(1.1rem,3.5vw,2rem);padding-bottom:clamp(.85rem,2.2vw,1.25rem)}
 
 .abertura__titulo{
   font-size:clamp(1.9rem,6.4vw,3.25rem);
@@ -252,44 +278,21 @@ button,a,summary,label{touch-action:manipulation}
   font-stretch:86%;
   line-height:1.03;
   letter-spacing:-.02em;
-  max-width:18ch;
+  max-width:24ch;
 }
 
 .abertura__linha{
-  margin-top:.7rem;
+  margin-top:.55rem;
   max-width:46ch;
   color:var(--tinta-fraca);
   font-size:clamp(.95rem,2.6vw,1.05rem);
-}
-
-.horario{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.15rem}
-
-.horario__linha{
-  display:flex;
-  align-items:center;
-  gap:.5rem;
-  padding:.4rem .7rem;
-  font-size:.78rem;
-  font-weight:600;
-  background:var(--branco);
-  border:1.5px solid var(--borda);
-  border-radius:6px;
-}
-
-.horario__dia{
-  font-size:.66rem;
-  font-weight:800;
-  font-stretch:78%;
-  text-transform:uppercase;
-  letter-spacing:.09em;
-  color:var(--tinta-fraca);
 }
 
 /* ---------- filtros ---------- */
 
 .loja{padding-bottom:clamp(2.5rem,6vw,4rem)}
 
-.filtros{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:clamp(1rem,3vw,1.5rem)}
+.filtros{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:clamp(.7rem,2.2vw,1.15rem)}
 
 .chip{
   font-family:inherit;
@@ -481,38 +484,46 @@ button,a,summary,label{touch-action:manipulation}
 
 /* ---------- barra fixa do pedido (celular) ---------- */
 
+/* sempre visível no celular. Só duas ações, e as duas existem de
+   verdade — nada de ícone morto de conta, favoritos ou busca. */
 .barra-pedido{
   position:fixed;
   left:0;
   right:0;
   bottom:0;
   z-index:45;
+  display:flex;
+  gap:.5rem;
   background:var(--branco);
   border-top:var(--traco) solid var(--preto);
-  padding:.6rem var(--gutter);
+  padding:.55rem var(--gutter);
   padding-left:calc(var(--gutter) + env(safe-area-inset-left, 0px));
   padding-right:calc(var(--gutter) + env(safe-area-inset-right, 0px));
   /* o indicador de home do iPhone mora aqui embaixo */
-  padding-bottom:calc(.6rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom:calc(.55rem + env(safe-area-inset-bottom, 0px));
 }
 
-.barra-pedido__botao{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:.75rem;
-  width:100%;
-}
+.barra-pedido .botao{flex:1;min-width:0;font-size:.68rem;padding:.72rem .4rem}
 
-.barra-pedido__qtd{font-size:.72rem;opacity:.85}
+.barra-conta{
+  display:inline-grid;
+  place-items:center;
+  min-width:1.3rem;
+  height:1.3rem;
+  margin-left:.15rem;
+  padding:0 .3rem;
+  font-size:.7rem;
+  color:var(--amarelo);
+  background:var(--preto);
+  border-radius:999px;
+}
 
 /* espaço no fim da página pra barra não tampar o rodapé */
-body.com-barra{padding-bottom:calc(76px + env(safe-area-inset-bottom, 0px))}
-
-@media (min-width:900px){
-  .barra-pedido{display:none}
-  body.com-barra{padding-bottom:0}
+@media (max-width:899px){
+  body{padding-bottom:calc(88px + env(safe-area-inset-bottom, 0px))}
 }
+
+@media (min-width:900px){ .barra-pedido{display:none} }
 
 /* ---------- confirmação de item adicionado ---------- */
 
@@ -768,6 +779,10 @@ body.com-barra{padding-bottom:calc(76px + env(safe-area-inset-bottom, 0px))}
 
 <body>
 
+<div class="faixa">
+  <p class="conteudo faixa__texto">Atacado e varejo · Seg a sáb 11h&ndash;18h · Dom 10h&ndash;16h</p>
+</div>
+
 <header class="topo">
   <div class="conteudo topo__interno">
     <div class="marca">
@@ -784,12 +799,8 @@ body.com-barra{padding-bottom:calc(76px + env(safe-area-inset-bottom, 0px))}
 <main>
   <section class="abertura">
     <div class="conteudo">
-      <h1 class="abertura__titulo">Carretilha, pipa e linha</h1>
-      <p class="abertura__linha">Atendemos varejo e atacado. Escolhe aqui, monta o pedido e manda no WhatsApp.</p>
-      <div class="horario">
-        <p class="horario__linha"><span class="horario__dia">Seg a sáb</span> 11h às 18h</p>
-        <p class="horario__linha"><span class="horario__dia">Domingo</span> 10h às 16h</p>
-      </div>
+      <h1 class="abertura__titulo">Feito pra durar mais de uma temporada</h1>
+      <p class="abertura__linha">Escolhe aqui, monta o pedido e manda no WhatsApp.</p>
     </div>
   </section>
 
@@ -830,11 +841,11 @@ body.com-barra{padding-bottom:calc(76px + env(safe-area-inset-bottom, 0px))}
   </div>
 </div>
 
-<!-- barra que só aparece no celular quando já tem item no pedido -->
-<div class="barra-pedido" id="barra-pedido" hidden>
-  <button type="button" class="botao botao--bloco barra-pedido__botao" id="abrir-carrinho-barra">
-    <span class="barra-pedido__qtd" id="conta-barra">0 itens</span>
-    <span>Ver pedido</span>
+<!-- barra fixa do celular. Duas ações, as duas de verdade. -->
+<div class="barra-pedido" id="barra-pedido">
+  <a class="botao botao--claro" id="barra-zap" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+  <button type="button" class="botao" id="abrir-carrinho-barra">
+    Ver pedido <span class="barra-conta" id="conta-barra">0</span>
   </button>
 </div>
 
@@ -989,7 +1000,6 @@ const grade     = document.getElementById('grade');
 const aviso     = document.getElementById('aviso');
 const contaTopo = document.getElementById('conta-topo');
 const contaBarra= document.getElementById('conta-barra');
-const barra     = document.getElementById('barra-pedido');
 const botaoTopo = document.getElementById('abrir-carrinho');
 
 const modalProduto  = document.getElementById('modal-produto');
@@ -1397,9 +1407,10 @@ function atualizarCarrinho(){
     ? 'Ver pedido, ' + n + (n === 1 ? ' item' : ' itens')
     : 'Ver pedido, vazio');
 
-  contaBarra.textContent = n + (n === 1 ? ' item' : ' itens');
-  barra.hidden = n === 0;
-  document.body.classList.toggle('com-barra', n > 0);
+  contaBarra.textContent = String(n);
+  document.getElementById('abrir-carrinho-barra').setAttribute('aria-label', n
+    ? 'Ver pedido, ' + n + (n === 1 ? ' item' : ' itens')
+    : 'Ver pedido, vazio');
 
   aviso.textContent = n
     ? n + (n === 1 ? ' item no pedido' : ' itens no pedido')
@@ -1595,8 +1606,10 @@ ajustaLogo();
 montaFiltros();
 mostrar('Tudo');
 atualizarCarrinho();
-document.getElementById('zap-geral').href =
-  linkWhats('Olá! Vi o site da França Pipas e queria perguntar sobre um produto.');
+
+const perguntaGeral = linkWhats('Olá! Vi o site da França Pipas e queria perguntar sobre um produto.');
+document.getElementById('zap-geral').href = perguntaGeral;
+document.getElementById('barra-zap').href = perguntaGeral;
 </script>
 
 </body>
