@@ -18,7 +18,7 @@
 <title>França Pipas — pipa, carretilha e linha, atacado e varejo em Francisco Morato</title>
 <meta name="description" content="Carretilha, linha, pipa e rabiola de acabamento caprichado, no atacado e no varejo. Francisco Morato, SP. Monte o pedido e mande pelo WhatsApp.">
 <link rel="canonical" href="https://eoguuga.github.io/franca-pipas/">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#04153E">
 
 <!-- ícone da aba do navegador e do atalho na tela do celular -->
 <link rel="icon" type="image/png" sizes="96x96" href="fotos/icone.png">
@@ -56,6 +56,7 @@
   --papel:#F2F3F6;     /* fundo atrás da foto do produto */
   --tinta:#141621;
   --tinta-fraca:#5A6072;
+  --tinta-clara:#9AA6C8;   /* texto secundário sobre o azul escuro */
   --borda:#DFE2EA;
 
   --traco:2px;
@@ -83,6 +84,10 @@ h1,h2,h3,p,ul,li{margin:0;padding:0}
 ul{list-style:none}
 
 :focus-visible{outline:3px solid var(--preto);outline-offset:3px}
+
+/* mata o zoom por duplo toque do Safari em tudo que é clicável,
+   sem tirar o pinça-pra-ampliar da página */
+button,a,summary,label{touch-action:manipulation}
 
 .so-leitor{
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;
@@ -148,29 +153,36 @@ ul{list-style:none}
 
 /* ---------- topo ---------- */
 
+/* faixa azul da marca. A ordem campo escuro -> régua de azul vivo
+   -> linha preta é a mesma construção da moldura da logo, e faz o
+   fundo próprio dela sumir dentro do cabeçalho. */
 .topo{
-  position:sticky;
-  top:0;
   z-index:40;
-  background:var(--branco);
-  border-bottom:var(--traco) solid var(--preto);
+  background:var(--azul-fundo);
+  border-bottom:4px solid var(--azul-vivo);
+  box-shadow:0 2px 0 var(--preto);
   padding-top:env(safe-area-inset-top, 0px);
 }
+
+/* gruda só no desktop: no celular quem dá acesso ao pedido é a
+   barra de baixo, e cabeçalho fixo alto come tela demais */
+@media (min-width:900px){ .topo{position:sticky;top:0} }
 
 .topo__interno{
   display:flex;
   align-items:center;
-  gap:.75rem;
-  padding-top:.6rem;
-  padding-bottom:.6rem;
+  gap:.85rem;
+  padding-top:.7rem;
+  padding-bottom:.7rem;
 }
 
 .marca{display:flex;align-items:center;flex:none}
 
-.marca__logo{height:clamp(46px,11vw,62px);width:auto;border-radius:5px}
+.marca__logo{height:clamp(70px,16vw,96px);width:auto;border-radius:6px}
 
 .marca__texto{
-  font-size:1.05rem;
+  color:var(--branco);
+  font-size:1.25rem;
   font-weight:900;
   font-stretch:84%;
   text-transform:uppercase;
@@ -180,7 +192,7 @@ ul{list-style:none}
 .topo__local{
   flex:1;
   min-width:0;
-  color:var(--tinta-fraca);
+  color:var(--tinta-clara);
   font-size:.68rem;
   font-weight:700;
   font-stretch:78%;
@@ -208,7 +220,10 @@ ul{list-style:none}
   border-radius:6px;
 }
 
-.carrinho-botao:hover{background:var(--papel)}
+.carrinho-botao:hover{background:var(--amarelo)}
+
+/* sobre a faixa azul o foco preto some; aqui ele vira branco */
+.topo :focus-visible{outline-color:var(--branco)}
 
 .carrinho-botao__conta{
   display:inline-grid;
@@ -440,19 +455,23 @@ ul{list-style:none}
 
 /* ---------- rodapé ---------- */
 
+/* rodapé fecha a página com a mesma faixa azul do cabeçalho */
 .rodape{
-  border-top:var(--traco) solid var(--preto);
+  background:var(--azul-fundo);
+  color:var(--branco);
+  border-top:4px solid var(--azul-vivo);
+  box-shadow:0 -2px 0 var(--preto);
   padding-top:clamp(2rem,5vw,3.25rem);
   padding-bottom:clamp(2rem,5vw,3.25rem);
 }
 
 .rodape__titulo{font-size:clamp(1.35rem,4.5vw,2rem);font-weight:900;font-stretch:86%;line-height:1.1}
-.rodape__linha{margin-top:.6rem;max-width:44ch;color:var(--tinta-fraca)}
+.rodape__linha{margin-top:.6rem;max-width:44ch;color:var(--tinta-clara)}
 .rodape .botao{margin-top:1.2rem}
 
 .rodape__pe{
   margin-top:1.75rem;
-  color:var(--tinta-fraca);
+  color:var(--tinta-clara);
   font-size:.68rem;
   font-weight:700;
   font-stretch:78%;
@@ -494,6 +513,74 @@ body.com-barra{padding-bottom:calc(76px + env(safe-area-inset-bottom, 0px))}
   .barra-pedido{display:none}
   body.com-barra{padding-bottom:0}
 }
+
+/* ---------- confirmação de item adicionado ---------- */
+
+.confirma{
+  position:fixed;
+  z-index:44;                      /* abaixo da barra de pedido (45) */
+  background:var(--branco);
+  border:var(--traco) solid var(--preto);
+  border-radius:10px;
+  box-shadow:4px 4px 0 var(--preto);
+  padding:.7rem .8rem;
+}
+
+/* celular: encostada acima da barra de pedido, sem tapar o rodapé
+   nem o botão de enviar. Some sozinha, então cobre pouco e por pouco. */
+@media (max-width:899px){
+  .confirma{
+    left:calc(.6rem + env(safe-area-inset-left, 0px));
+    right:calc(.6rem + env(safe-area-inset-right, 0px));
+    bottom:calc(78px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (min-width:900px){
+  .confirma{
+    right:calc(1.25rem + env(safe-area-inset-right, 0px));
+    bottom:1.25rem;
+    width:25rem;
+  }
+}
+
+.confirma__topo{display:flex;align-items:flex-start;gap:.65rem}
+
+.confirma__foto{
+  flex:none;
+  width:48px;
+  height:48px;
+  background:var(--papel);
+  border:1.5px solid var(--borda);
+  border-radius:6px;
+  overflow:hidden;
+}
+
+.confirma__foto img{width:100%;height:100%;object-fit:cover}
+.confirma__dados{flex:1;min-width:0}
+
+.confirma__selo{
+  color:var(--azul-fundo);
+  font-size:.66rem;
+  font-weight:800;
+  font-stretch:80%;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.confirma__nome{
+  margin-top:.1rem;
+  font-size:.88rem;
+  font-weight:700;
+  line-height:1.25;
+}
+
+/* empilhado: principal em largura cheia, secundária centrada
+   embaixo. Lado a lado, "Continuar comprando" encostava na borda
+   em toda largura testada. */
+.confirma__acoes{display:flex;flex-direction:column;gap:.45rem;margin-top:.75rem}
+.confirma__acoes .botao{width:100%;padding:.6rem .7rem;font-size:.72rem}
+.confirma__acoes .botao-simples{align-self:center;border-bottom:0;padding:.35rem .5rem}
 
 /* ---------- modais ---------- */
 
@@ -724,6 +811,24 @@ body.com-barra{padding-bottom:calc(76px + env(safe-area-inset-bottom, 0px))}
     <p class="rodape__pe">França Pipas · Atacado e varejo · Francisco Morato, SP</p>
   </div>
 </footer>
+
+<!-- confirmação que aparece ao adicionar. O anúncio pra leitor de tela
+     sai pela região #aviso, não daqui: região viva com botão dentro
+     atrapalha mais do que ajuda. -->
+<div class="confirma" id="confirma" hidden>
+  <div class="confirma__topo">
+    <div class="confirma__foto"><img id="confirma-foto" src="" alt=""></div>
+    <div class="confirma__dados">
+      <p class="confirma__selo">Produto adicionado</p>
+      <p class="confirma__nome" id="confirma-nome"></p>
+    </div>
+    <button type="button" class="fechar" id="confirma-fechar" aria-label="Fechar aviso">&times;</button>
+  </div>
+  <div class="confirma__acoes">
+    <button type="button" class="botao" id="confirma-ver">Ver pedido</button>
+    <button type="button" class="botao-simples" id="confirma-seguir">Continuar comprando</button>
+  </div>
+</div>
 
 <!-- barra que só aparece no celular quando já tem item no pedido -->
 <div class="barra-pedido" id="barra-pedido" hidden>
@@ -1215,7 +1320,58 @@ function adicionar(produto, foto, quantidade){
     });
   }
   atualizarCarrinho();
+  mostrarConfirmacao(produto, foto, quantidade);
 }
+
+/* ---------------- confirmação ---------------- */
+
+const confirma = document.getElementById('confirma');
+let relogioConfirma = null;
+
+function escondeConfirmacao(){
+  clearTimeout(relogioConfirma);
+  relogioConfirma = null;
+  confirma.hidden = true;
+}
+
+function contaTempo(){
+  clearTimeout(relogioConfirma);
+  relogioConfirma = setTimeout(escondeConfirmacao, 5500);
+}
+
+function mostrarConfirmacao(produto, foto, quantidade){
+  const img = document.getElementById('confirma-foto');
+  if (foto && foto.arquivo) {
+    img.src = foto.arquivo;
+    img.hidden = false;
+  } else {
+    img.removeAttribute('src');
+    img.hidden = true;
+  }
+  document.getElementById('confirma-nome').textContent =
+    (quantidade > 1 ? quantidade + 'x ' : '') + produto.nome +
+    ((foto && foto.opcao) ? ' · cor ' + foto.opcao : '');
+  confirma.hidden = false;
+  contaTempo();
+
+  // o anúncio pra leitor de tela sai pela região viva já existente
+  const n = totalItens();
+  aviso.textContent = produto.nome + ' adicionado ao pedido. ' +
+    n + (n === 1 ? ' item no total.' : ' itens no total.');
+}
+
+// não some no meio do caminho de quem está usando ou navegando por teclado
+confirma.addEventListener('mouseenter', function(){ clearTimeout(relogioConfirma); });
+confirma.addEventListener('mouseleave', contaTempo);
+confirma.addEventListener('focusin', function(){ clearTimeout(relogioConfirma); });
+confirma.addEventListener('focusout', contaTempo);
+
+document.getElementById('confirma-fechar').addEventListener('click', escondeConfirmacao);
+document.getElementById('confirma-seguir').addEventListener('click', escondeConfirmacao);
+document.getElementById('confirma-ver').addEventListener('click', function(){
+  escondeConfirmacao();
+  abrirCarrinho();
+});
 
 function totalItens(){
   return CARRINHO.reduce(function(s, i){ return s + i.qtd; }, 0);
@@ -1367,6 +1523,7 @@ function pintaCarrinho(){
 }
 
 function abrirCarrinho(){
+  escondeConfirmacao();
   ultimoFoco = document.activeElement;
   pintaCarrinho();
   modalCarrinho.showModal();
