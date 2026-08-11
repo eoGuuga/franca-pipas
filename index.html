@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- =========================================================
+     ENDEREÇO DO SITE PUBLICADO
+     Hoje aponta pro GitHub Pages. Se um dia comprar domínio
+     próprio, troque nos TRÊS lugares abaixo (canonical, og:url
+     e og:image). Endereço tem que ser completo, com https:// na
+     frente — o WhatsApp não aceita caminho relativo, e sem isso
+     a prévia do link sai sem imagem.
+     ========================================================= -->
+
+<title>França Pipas — pipa, carretilha e linha, atacado e varejo em Francisco Morato</title>
+<meta name="description" content="Carretilha, linha, pipa e rabiola de acabamento caprichado, no atacado e no varejo. Francisco Morato, SP. Veja o que tem na loja e peça pelo WhatsApp.">
+<link rel="canonical" href="https://eoguuga.github.io/franca-pipas/">
+<meta name="theme-color" content="#04153E">
+
+<!-- ícone da aba do navegador e do atalho na tela do celular -->
+<link rel="icon" type="image/png" sizes="96x96" href="fotos/icone.png">
+<link rel="apple-touch-icon" href="fotos/icone-180.png">
+
+<!-- prévia que aparece quando alguém cola o link no WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="França Pipas">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="França Pipas — carretilha, linha e pipa no atacado e varejo">
+<meta property="og:description" content="Veja o que tem na loja e peça pelo WhatsApp. Varejo e atacado, Francisco Morato, SP.">
+<meta property="og:url" content="https://eoguuga.github.io/franca-pipas/">
+<meta property="og:image" content="https://eoguuga.github.io/franca-pipas/fotos/link-whatsapp.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo da França Pipas, loja de pipas em Francisco Morato, SP">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
+
+<style>
+:root{
+  /* ---- cores da logo ----
+     Tiradas do arquivo fotos/logo.jpg, medindo os pixels.
+     Pra trocar a cor do site inteiro, mexe só aqui.
+     azul-fundo    fundo escuro atrás da logo
+     azul-moldura  azul vivo da moldura recortada
+     amarelo       topo das letras FRANÇA PIPAS
+     laranja       base das letras e do pôr do sol
+     preto         o contorno grosso de tudo                       */
+  --azul-fundo:#04153E;
+  --azul-moldura:#0D92E3;
+  --azul-claro:#BFE0F8;
+  --amarelo:#FFF200;
+  --laranja:#FF8500;
+  --preto:#0A0A0B;
+
+  --papel:#EEF1FA;
+  --branco:#FFFFFF;
+  --tinta-fraca:#464C6B;
+  --borda-fraca:#6C7CAE;
+
+  /* ---- contorno preto ----
+     Espessura do traço e da sombra dura, usadas no site todo.
+     Mudar aqui muda o peso do contorno em tudo de uma vez.       */
+  --traco:3px;
+  --traco-fino:2.5px;
+  --sombra:4px 4px 0 var(--preto);
+  --sombra-media:3px 3px 0 var(--preto);
+
+  --margem:clamp(1rem, 4.5vw, 3rem);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  background:var(--papel);
+  color:var(--preto);
+  font-family:'Archivo',system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.5;
+}
+
+img{display:block;max-width:100%}
+
+h1,h2,h3,p{margin:0}
+
+:focus-visible{
+  outline:3px solid var(--preto);
+  outline-offset:3px;
+}
+
+.so-leitor{
+  position:absolute;width:1px;height:1px;
+  padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+}
+
+/* ---------- topo ---------- */
+
+.topo{
+  background:var(--azul-fundo);
+  padding:1rem var(--margem);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+
+.marca{display:flex;align-items:center;min-height:72px}
+
+/* a logo tem fundo próprio, então o contorno preto vira a aresta
+   dela de propósito, em vez de virar emenda com o fundo do site */
+.marca__logo{
+  height:clamp(72px,17vw,108px);
+  width:auto;
+  border:var(--traco) solid var(--preto);
+  border-radius:6px;
+  box-shadow:var(--sombra-media);
+}
+
+.marca__texto{
+  color:var(--branco);
+  font-size:clamp(1.15rem,4.5vw,1.5rem);
+  font-weight:900;
+  font-stretch:82%;
+  text-transform:uppercase;
+  letter-spacing:.01em;
+  line-height:1.1;
+}
+
+.topo__local{
+  color:var(--amarelo);
+  font-size:.72rem;
+  font-weight:700;
+  font-stretch:78%;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+}
+
+/* ---------- abertura ---------- */
+
+.abertura{
+  background:var(--azul-fundo);
+  border-bottom:var(--traco) solid var(--preto);
+  padding:clamp(1.25rem,5vw,2.75rem) var(--margem) clamp(1.75rem,5.5vw,3rem);
+}
+
+/* mesma construção da logo: campo azul escuro, moldura em azul
+   mais claro, linha preta grossa por fora e por dentro dela */
+.abertura__moldura{
+  background:var(--azul-fundo);
+  border:clamp(7px,2.2vw,14px) solid var(--azul-moldura);
+  border-radius:8px;
+  box-shadow:0 0 0 var(--traco) var(--preto), inset 0 0 0 var(--traco) var(--preto);
+  padding:clamp(1.5rem,5.5vw,3rem);
+}
+
+/* letreiro com contorno preto, igual ao nome na logo */
+.abertura__titulo{
+  color:var(--amarelo);
+  -webkit-text-stroke:clamp(3px,1.1vw,8px) var(--preto);
+  paint-order:stroke fill;
+  font-size:clamp(2.4rem,10.5vw,5.25rem);
+  font-weight:900;
+  font-stretch:80%;
+  text-transform:uppercase;
+  line-height:.96;
+  letter-spacing:-.015em;
+  max-width:13ch;
+}
+
+.abertura__titulo span{color:var(--laranja)}
+
+.abertura__linha{
+  color:var(--branco);
+  margin-top:1.1rem;
+  max-width:38ch;
+  font-size:clamp(1rem,3.4vw,1.15rem);
+  font-weight:450;
+}
+
+.horario{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.6rem;
+  margin-top:1.6rem;
+}
+
+.horario__linha{
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  background:var(--amarelo);
+  border:var(--traco-fino) solid var(--preto);
+  border-radius:4px;
+  box-shadow:var(--sombra-media);
+  padding:.5rem .8rem;
+  font-size:.78rem;
+  font-weight:700;
+}
+
+.horario__linha::before{
+  content:'';
+  flex:none;
+  width:8px;height:8px;
+  background:var(--preto);
+  transform:rotate(45deg);
+}
+
+.horario__dia{
+  font-size:.7rem;
+  font-weight:800;
+  font-stretch:78%;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+/* ---------- filtros ---------- */
+
+.loja{padding:clamp(1.5rem,5vw,2.75rem) var(--margem) clamp(2.5rem,7vw,4rem)}
+
+.filtros{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin-bottom:clamp(1.25rem,4vw,2rem);
+}
+
+.chip{
+  font-family:inherit;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  font-size:.72rem;
+  font-weight:800;
+  font-stretch:80%;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  padding:.55rem .85rem;
+  color:var(--preto);
+  background:var(--branco);
+  border:var(--traco-fino) solid var(--preto);
+  border-radius:4px;
+  transition:background-color .12s ease,box-shadow .12s ease,transform .12s ease;
+}
+
+.chip::before{
+  content:'';
+  flex:none;
+  width:8px;height:8px;
+  background:var(--preto);
+  transform:rotate(45deg);
+  opacity:0;
+  transition:opacity .12s ease;
+}
+
+.chip:hover{background:var(--azul-claro)}
+
+.chip[aria-pressed="true"]{
+  background:var(--amarelo);
+  box-shadow:var(--sombra-media);
+}
+
+.chip[aria-pressed="true"]:hover{background:var(--amarelo)}
+
+.chip[aria-pressed="true"]::before{opacity:1}
+
+/* ---------- grade ---------- */
+
+.grade{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:clamp(.75rem,2.2vw,1.4rem);
+}
+
+.produto{
+  display:flex;
+  flex-direction:column;
+  gap:.35rem;
+  background:var(--branco);
+  border:var(--traco) solid var(--preto);
+  border-radius:6px;
+  box-shadow:var(--sombra);
+  padding:clamp(.65rem,2vw,1rem);
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+
+.produto:hover{
+  transform:translate(-2px,-2px);
+  box-shadow:6px 6px 0 var(--preto);
+}
+
+.disco{
+  position:relative;
+  aspect-ratio:1;
+  padding:7%;
+  margin-bottom:.5rem;
+  border:var(--traco) solid var(--preto);
+  border-radius:50%;
+  background:var(--azul-moldura);
+}
+
+.disco__aro{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,var(--preto) 0deg 1.6deg,transparent 1.6deg 12deg);
+}
+
+.disco__foto,
+.disco__vazio{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  border:2px solid var(--preto);
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.disco__vazio{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--azul-claro);
+  color:var(--tinta-fraca);
+  font-size:.62rem;
+  font-weight:700;
+  font-stretch:78%;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+
+/* miniaturas: só aparecem quando o produto tem mais de uma foto.
+   O estado escolhido é marcado de três jeitos ao mesmo tempo —
+   opacidade cheia, contorno preto mais grosso e anel amarelo —
+   pra não depender só da foto grande ter trocado. */
+.minis{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  margin-top:-.2rem;
+}
+
+.mini{
+  flex:none;
+  width:28px;
+  height:28px;
+  padding:0;
+  cursor:pointer;
+  overflow:hidden;
+  background:var(--azul-claro);
+  border:2px solid var(--borda-fraca);
+  border-radius:50%;
+  opacity:.55;
+  transition:opacity .12s ease,border-color .12s ease,box-shadow .12s ease;
+}
+
+.mini img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.mini:hover{opacity:1}
+
+.mini[aria-pressed="true"]{
+  opacity:1;
+  border:3px solid var(--preto);
+  box-shadow:0 0 0 3px var(--amarelo);
+}
+
+/* afasta o anel de foco do anel amarelo de selecionado */
+.mini:focus-visible{outline-offset:5px}
+
+.produto--esgotado .mini img{filter:grayscale(1)}
+
+.produto__nome{
+  font-size:.95rem;
+  font-weight:800;
+  font-stretch:92%;
+  line-height:1.2;
+}
+
+.produto__medida{
+  color:var(--tinta-fraca);
+  font-size:.68rem;
+  font-weight:700;
+  font-stretch:78%;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+.produto__preco{
+  font-size:1.3rem;
+  font-weight:900;
+  font-stretch:84%;
+  line-height:1.1;
+  margin-top:.15rem;
+}
+
+.produto__preco--consulta{
+  font-size:.85rem;
+  font-weight:700;
+  font-stretch:88%;
+  color:var(--tinta-fraca);
+  padding:.3rem 0;
+}
+
+.botao{
+  display:block;
+  width:100%;
+  margin-top:auto;
+  padding:.75rem .5rem;
+  text-align:center;
+  text-decoration:none;
+  font-family:inherit;
+  font-size:.76rem;
+  font-weight:800;
+  font-stretch:82%;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  line-height:1.1;
+  color:var(--preto);
+  background:var(--laranja);
+  border:var(--traco-fino) solid var(--preto);
+  border-radius:4px;
+  box-shadow:var(--sombra-media);
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+
+.botao:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--preto)}
+
+.botao:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--preto)}
+
+.esgotado{
+  margin-top:auto;
+  padding:.75rem .5rem;
+  text-align:center;
+  font-size:.7rem;
+  font-weight:800;
+  font-stretch:80%;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--tinta-fraca);
+  background:var(--papel);
+  border:var(--traco-fino) dashed var(--borda-fraca);
+  border-radius:4px;
+}
+
+.produto--esgotado .disco__foto,
+.produto--esgotado .disco__vazio{filter:grayscale(1);opacity:.5}
+
+.produto--esgotado .produto__preco{color:var(--tinta-fraca)}
+
+.grade__vazio{
+  grid-column:1/-1;
+  color:var(--tinta-fraca);
+  font-weight:500;
+}
+
+/* ---------- rodapé ---------- */
+
+.rodape{
+  background:var(--laranja);
+  border-top:var(--traco) solid var(--preto);
+  padding:clamp(2.25rem,7vw,4rem) var(--margem);
+}
+
+.rodape__titulo{
+  font-size:clamp(1.6rem,6.5vw,2.6rem);
+  font-weight:900;
+  font-stretch:82%;
+  text-transform:uppercase;
+  line-height:1;
+  letter-spacing:-.01em;
+}
+
+.rodape__linha{
+  margin-top:.85rem;
+  max-width:40ch;
+  font-weight:500;
+}
+
+.botao--grande{
+  width:auto;
+  max-width:24rem;
+  margin-top:1.5rem;
+  padding:1.05rem 1.5rem;
+  font-size:1rem;
+  letter-spacing:.05em;
+  background:var(--amarelo);
+  border-width:var(--traco);
+  box-shadow:5px 5px 0 var(--preto);
+}
+
+.botao--grande:hover{box-shadow:6px 6px 0 var(--preto)}
+
+.rodape__pe{
+  margin-top:2rem;
+  font-size:.7rem;
+  font-weight:700;
+  font-stretch:78%;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+}
+
+/* ---------- movimento ---------- */
+
+@keyframes girar{to{transform:rotate(360deg)}}
+
+.produto:hover .disco__aro,
+.produto:focus-within .disco__aro{animation:girar 4s linear infinite}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topo">
+  <div class="marca">
+    <img id="logo" class="marca__logo" src="fotos/logo.jpg" alt="França Pipas" width="640" height="640">
+    <span id="marca-texto" class="marca__texto" hidden>França Pipas</span>
+  </div>
+  <p class="topo__local">Francisco Morato · SP</p>
+</header>
+
+<main>
+  <section class="abertura">
+    <div class="abertura__moldura">
+      <h1 class="abertura__titulo">Material que <span>aguenta raia</span></h1>
+      <p class="abertura__linha">Escolhe aqui e chama no WhatsApp — o pedido já vai escrito. Atendemos varejo e atacado.</p>
+      <div class="horario">
+        <p class="horario__linha"><span class="horario__dia">Seg a sáb</span> 11h às 18h</p>
+        <p class="horario__linha"><span class="horario__dia">Domingo</span> 10h às 16h</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="loja" aria-labelledby="titulo-loja">
+    <h2 id="titulo-loja" class="so-leitor">Produtos</h2>
+    <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoria"></div>
+    <p class="so-leitor" role="status" id="contagem"></p>
+    <ul class="grade" id="grade"></ul>
+  </section>
+</main>
+
+<footer class="rodape">
+  <h2 class="rodape__titulo">Não achou o que queria?</h2>
+  <p class="rodape__linha">Manda mensagem falando o que você procura. Se for pra revender, chama também.</p>
+  <a class="botao botao--grande" id="zap-geral" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+  <p class="rodape__pe">França Pipas · Atacado e varejo · Francisco Morato, SP</p>
+</footer>
+
+<script>
+/* ============================================================
+   NÚMERO DO WHATSAPP DA LOJA
+   ------------------------------------------------------------
+   É pra onde vão TODOS os botões da página. Se mudar o número
+   da loja, troque aqui e pronto — muda no site inteiro.
+   Escreve só os números, sem espaço, sem parênteses e sem
+   traço, começando com 55 (Brasil):
+
+     55 + DDD + número      ->  5511987654321
+   ============================================================ */
+const NUMERO = '5511954871911';
+
+
+/* ============================================================
+   PRODUTOS DA VITRINE
+
+   Pra adicionar um produto, copia um bloco { ... } inteiro,
+   cola embaixo e troca o que está escrito. Cada bloco termina
+   com vírgula. Não apague as aspas nem as chaves.
+
+   nome      texto  - como o produto aparece na tela e na
+                      mensagem do WhatsApp
+   categoria texto  - agrupa o produto no filtro lá em cima.
+                      Escreva sempre igual (Carretilhas, Pipas).
+                      Categoria nova vira botão de filtro sozinha.
+   medida    texto  - polegada, centímetro, tamanho do kit.
+                      Deixe '' (vazio) se o produto não tem
+                      medida — a linha some do card sozinha.
+   preco     número - só o número, ponto no lugar da vírgula
+                      (189.90). Escreva null (sem aspas) pra
+                      aparecer "Sob consulta".
+   estoque   true / false - false mostra "Esgotado no momento"
+                      no lugar do botão de pedido
+   fotos     lista  - ver abaixo
+
+   ------------------------------------------------------------
+   COMO FUNCIONA A LISTA DE FOTOS
+
+   A PRIMEIRA foto é a que aparece grande quando o card abre.
+   Se tiver mais de uma, aparecem bolinhas embaixo pra trocar.
+   Com uma foto só, nenhuma bolinha aparece.
+
+   Cada foto tem até três coisas:
+
+     arquivo  obrigatório - caminho dentro da pasta fotos
+     alt      recomendado - descreve o que a FOTO mostra, não o
+                            nome do produto. É o que a pessoa
+                            cega ouve e o que o Google lê.
+                            Ex: 'Verso da carretilha, mostrando
+                            o cubo de madeira'. Se deixar de
+                            fora, o site usa o nome do produto.
+     opcao    só quando a foto é uma VARIAÇÃO à venda, tipo cor.
+                            O que estiver escrito aqui entra na
+                            mensagem do WhatsApp: opcao 'azul'
+                            vira "...na cor azul".
+                            NÃO use em foto que é só outro
+                            ângulo do mesmo produto.
+   ============================================================ */
+const PRODUTOS = [
+  {
+    nome: 'Carretilha com catraca destravada',
+    categoria: 'Carretilhas',
+    medida: '16 polegadas',
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: 'fotos/carretilha-16-polegadas.webp',
+        alt: 'Carretilha de madeira clara vista de frente, vazada por furos redondos de vários tamanhos formando espiral' },
+      { arquivo: 'fotos/carretilha-16-polegadas-mecanismo.webp',
+        alt: 'Centro da carretilha em close, com o eixo escuro de metal e o aro externo de madeira' },
+      { arquivo: 'fotos/carretilha-16-polegadas-com-linha.webp',
+        alt: 'A carretilha atrás de três cones de linha Vera Cruz, nas cores azul, amarela e laranja' }
+    ]
+  },
+  {
+    nome: 'Carretilha de madeira pintada',
+    categoria: 'Carretilhas',
+    medida: '18 polegadas',
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: 'fotos/carretilha-18-polegadas-pintada-vitral.webp',
+        alt: 'Carretilha pintada com desenho de vitral, em faixas coloridas contornadas de preto' },
+      { arquivo: 'fotos/carretilha-18-polegadas-pintada-espiral.webp',
+        alt: 'Carretilha pintada com espiral e raios coloridos saindo do centro' }
+    ]
+  },
+  {
+    nome: 'Carretilha crua de madeira',
+    categoria: 'Carretilhas',
+    medida: '',
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: 'fotos/carretilha-crua-madeira.webp',
+        alt: 'Carretilha de madeira sem pintura, de frente, com furos redondos em círculos concêntricos' },
+      { arquivo: 'fotos/carretilha-crua-madeira-verso.webp',
+        alt: 'Verso da mesma carretilha, mostrando o cubo de madeira no centro e o encaixe do eixo' }
+    ]
+  },
+  {
+    nome: 'Pipa de latão laminado 60 cm',
+    categoria: 'Pipas',
+    medida: 'Kit com 5 ou 10 unidades',
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: 'fotos/kit-pipa-latao-60cm-dourado.webp',  opcao: 'dourada',
+        alt: 'Pipa de latão laminado dourado, em losango, com a vareta atravessada' },
+      { arquivo: 'fotos/kit-pipa-latao-60cm-azul.webp',     opcao: 'azul',
+        alt: 'Pipa de latão laminado azul, em losango' },
+      { arquivo: 'fotos/kit-pipa-latao-60cm-vermelho.webp', opcao: 'vermelha',
+        alt: 'Pipa de latão laminado vermelho, em losango' },
+      { arquivo: 'fotos/kit-pipa-latao-60cm-preto.webp',    opcao: 'preta',
+        alt: 'Pipa de latão laminado preto, em losango' },
+      { arquivo: 'fotos/kit-pipa-latao-60cm-prata.webp',    opcao: 'prata',
+        alt: 'Pipa de latão laminado prateado espelhado, em losango' },
+      { arquivo: 'fotos/kit-pipa-latao-60cm-lilas.webp',    opcao: 'lilás',
+        alt: 'Pipa de latão laminado lilás, em losango' },
+      { arquivo: 'fotos/kit-pipa-latao-60cm-branco.webp',   opcao: 'branca',
+        alt: 'Pipa de latão laminado branco, em losango' }
+    ]
+  }
+];
+
+
+/* ===== daqui pra baixo é o funcionamento da página ===== */
+
+const filtros = document.getElementById('filtros');
+const grade = document.getElementById('grade');
+const contagem = document.getElementById('contagem');
+
+function precoEmReais(valor){
+  if (valor === null || valor === undefined) return null;
+  const casas = Number.isInteger(valor) ? 0 : 2;
+  return 'R$ ' + valor.toLocaleString('pt-BR', {
+    minimumFractionDigits: casas,
+    maximumFractionDigits: 2
+  });
+}
+
+function linkWhats(mensagem){
+  return 'https://wa.me/' + NUMERO + '?text=' + encodeURIComponent(mensagem);
+}
+
+function mensagemDoProduto(produto, foto){
+  const preco = precoEmReais(produto.preco);
+  const medida = produto.medida ? ', ' + produto.medida : '';
+  const cor = (foto && foto.opcao) ? ', na cor ' + foto.opcao : '';
+  const alvo = produto.nome + medida + cor;
+  return preco
+    ? 'Olá! Vi no site e quero ' + alvo + ' (' + preco + '). Ainda tem?'
+    : 'Olá! Vi no site e quero ' + alvo + '. Qual o valor?';
+}
+
+// alt escrito no array vence; sem ele, sobra o nome do produto
+function altDaFoto(produto, foto){
+  if (foto && foto.alt) return foto.alt;
+  if (foto && foto.opcao) return produto.nome + ', cor ' + foto.opcao;
+  return produto.nome + (produto.medida ? ', ' + produto.medida : '');
+}
+
+function discoVazio(){
+  const vazio = document.createElement('span');
+  vazio.className = 'disco__vazio';
+  vazio.textContent = 'sem foto';
+  return vazio;
+}
+
+function montaCard(produto){
+  const card = document.createElement('li');
+  card.className = 'produto' + (produto.estoque ? '' : ' produto--esgotado');
+
+  const fotos = produto.fotos || [];
+  const minis = [];
+  let principal = null;
+  let vazio = null;
+  let botao = null;
+
+  // troca a foto grande, marca a miniatura escolhida e refaz o link
+  // do WhatsApp (a cor escolhida entra na mensagem)
+  function escolherFoto(i){
+    const foto = fotos[i];
+    if (principal) {
+      if (vazio) { vazio.remove(); vazio = null; }
+      principal.hidden = false;
+      principal.src = foto.arquivo;
+      principal.alt = altDaFoto(produto, foto);
+    }
+    for (let j = 0; j < minis.length; j++) {
+      minis[j].setAttribute('aria-pressed', String(j === i));
+    }
+    if (botao) botao.href = linkWhats(mensagemDoProduto(produto, foto));
+  }
+
+  // ---- disco principal ----
+  const disco = document.createElement('div');
+  disco.className = 'disco';
+
+  const aro = document.createElement('span');
+  aro.className = 'disco__aro';
+  aro.setAttribute('aria-hidden', 'true');
+  disco.appendChild(aro);
+
+  if (fotos.length) {
+    principal = document.createElement('img');
+    principal.className = 'disco__foto';
+    principal.loading = 'lazy';
+    // arquivo faltando ou nome errado: mostra o disco vazio no lugar,
+    // sem quebrar o card, e volta sozinho se outra foto carregar
+    principal.addEventListener('error', function(){
+      principal.hidden = true;
+      if (!vazio) { vazio = discoVazio(); disco.appendChild(vazio); }
+    });
+    disco.appendChild(principal);
+  } else {
+    disco.appendChild(discoVazio());
+  }
+  card.appendChild(disco);
+
+  // ---- miniaturas, só com mais de uma foto ----
+  if (fotos.length > 1) {
+    const tira = document.createElement('div');
+    tira.className = 'minis';
+    tira.setAttribute('role', 'group');
+    tira.setAttribute('aria-label', 'Fotos de ' + produto.nome);
+
+    fotos.forEach(function(foto, i){
+      const mini = document.createElement('button');
+      mini.type = 'button';
+      mini.className = 'mini';
+      mini.setAttribute('aria-pressed', 'false');
+      mini.setAttribute('aria-label', foto.opcao
+        ? 'Cor ' + foto.opcao
+        : 'Foto ' + (i + 1) + ' de ' + fotos.length);
+
+      const img = document.createElement('img');
+      img.src = foto.arquivo;
+      img.alt = '';               // o rótulo do botão já descreve
+      img.loading = 'lazy';
+      mini.appendChild(img);
+
+      mini.addEventListener('click', function(){ escolherFoto(i); });
+      tira.appendChild(mini);
+      minis.push(mini);
+    });
+    card.appendChild(tira);
+  }
+
+  const nome = document.createElement('h3');
+  nome.className = 'produto__nome';
+  nome.textContent = produto.nome;
+  card.appendChild(nome);
+
+  // sem medida, a linha nem é criada
+  if (produto.medida) {
+    const medida = document.createElement('p');
+    medida.className = 'produto__medida';
+    medida.textContent = produto.medida;
+    card.appendChild(medida);
+  }
+
+  const preco = precoEmReais(produto.preco);
+  const linhaPreco = document.createElement('p');
+  linhaPreco.className = 'produto__preco' + (preco ? '' : ' produto__preco--consulta');
+  linhaPreco.textContent = preco ? preco : 'Sob consulta';
+  card.appendChild(linhaPreco);
+
+  if (produto.estoque) {
+    botao = document.createElement('a');
+    botao.className = 'botao';
+    botao.target = '_blank';
+    botao.rel = 'noopener';
+    botao.textContent = 'Pedir no WhatsApp';
+    card.appendChild(botao);
+  } else {
+    const esgotado = document.createElement('p');
+    esgotado.className = 'esgotado';
+    esgotado.textContent = 'Esgotado no momento';
+    card.appendChild(esgotado);
+  }
+
+  if (fotos.length) escolherFoto(0);
+  else if (botao) botao.href = linkWhats(mensagemDoProduto(produto, null));
+
+  return card;
+}
+
+function mostrar(categoria){
+  const lista = categoria === 'Tudo'
+    ? PRODUTOS
+    : PRODUTOS.filter(function(p){ return p.categoria === categoria; });
+
+  grade.replaceChildren();
+
+  if (lista.length === 0) {
+    const vazio = document.createElement('li');
+    vazio.className = 'grade__vazio';
+    vazio.textContent = 'Nada nessa categoria por enquanto.';
+    grade.appendChild(vazio);
+  } else {
+    lista.forEach(function(p){ grade.appendChild(montaCard(p)); });
+  }
+
+  contagem.textContent = lista.length === 1
+    ? '1 produto'
+    : lista.length + ' produtos';
+
+  filtros.querySelectorAll('.chip').forEach(function(chip){
+    chip.setAttribute('aria-pressed', String(chip.dataset.categoria === categoria));
+  });
+}
+
+function montaFiltros(){
+  const categorias = ['Tudo'].concat(
+    Array.from(new Set(PRODUTOS.map(function(p){ return p.categoria; })))
+  );
+
+  categorias.forEach(function(categoria){
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    chip.className = 'chip';
+    chip.dataset.categoria = categoria;
+    chip.setAttribute('aria-pressed', 'false');
+    chip.textContent = categoria;
+    chip.addEventListener('click', function(){ mostrar(categoria); });
+    filtros.appendChild(chip);
+  });
+}
+
+function ajustaLogo(){
+  const logo = document.getElementById('logo');
+  const texto = document.getElementById('marca-texto');
+  function semLogo(){
+    logo.hidden = true;
+    texto.hidden = false;
+  }
+  logo.addEventListener('error', semLogo);
+  if (logo.complete && logo.naturalWidth === 0) semLogo();
+}
+
+ajustaLogo();
+montaFiltros();
+mostrar('Tudo');
+document.getElementById('zap-geral').href =
+  linkWhats('Olá! Vi o site da França Pipas e queria perguntar sobre um produto.');
+</script>
+
+</body>
+</html>

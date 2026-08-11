@@ -1,0 +1,18 @@
+# Vídeos ficam de fora do Git.
+# Motivo: são binários grandes (~7 MB somados), ainda não são usados
+# em lugar nenhum do código, e o Git guarda binário no histórico pra
+# sempre — depois de commitado não sai mais sem reescrever a história.
+# Quando a vitrine for exibir vídeo, a saída é hospedar fora do repo
+# (ou usar Git LFS), não commitar o arquivo aqui.
+video/
+*.mp4
+
+# Arquivo de instruções do projeto, uso local.
+# Fora do repositório público de propósito.
+CLAUDE.md
+
+# Lixo de sistema operacional
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
