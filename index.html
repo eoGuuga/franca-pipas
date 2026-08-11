@@ -197,24 +197,25 @@ button,a,summary,label{touch-action:manipulation}
   padding-bottom:.7rem;
 }
 
-.marca{display:flex;align-items:center;flex:none}
+.marca__logo{flex:none;height:clamp(70px,16vw,96px);width:auto;border-radius:6px}
 
-.marca__logo{height:clamp(70px,16vw,96px);width:auto;border-radius:6px}
+/* o nome precisa existir como texto: dentro da logo ele fica
+   ilegível no tamanho que ela tem no celular */
+.topo__nome{flex:1;min-width:0}
 
-.marca__texto{
+.topo__loja{
   color:var(--branco);
-  font-size:1.25rem;
+  font-size:clamp(1.1rem,3.8vw,1.55rem);
   font-weight:900;
-  font-stretch:84%;
-  text-transform:uppercase;
-  line-height:1.05;
+  font-stretch:86%;
+  line-height:1.1;
+  letter-spacing:-.01em;
 }
 
 .topo__local{
-  flex:1;
-  min-width:0;
+  margin-top:.15rem;
   color:var(--tinta-clara);
-  font-size:.68rem;
+  font-size:.66rem;
   font-weight:700;
   font-stretch:78%;
   text-transform:uppercase;
@@ -273,12 +274,26 @@ button,a,summary,label{touch-action:manipulation}
 .abertura{padding-top:clamp(1.1rem,3.5vw,2rem);padding-bottom:clamp(.85rem,2.2vw,1.25rem)}
 
 .abertura__titulo{
-  font-size:clamp(1.9rem,6.4vw,3.25rem);
+  color:var(--azul-fundo);
+  font-size:clamp(2.15rem,7.2vw,4rem);
   font-weight:900;
   font-stretch:86%;
-  line-height:1.03;
-  letter-spacing:-.02em;
-  max-width:24ch;
+  line-height:1.08;
+  letter-spacing:-.025em;
+  max-width:22ch;
+}
+
+/* marca amarela na palavra que carrega a promessa. Presença com a
+   cor da marca, e preto sobre amarelo dá 16,9:1 — coisa que
+   laranja ou amarelo como COR DE TEXTO no branco não dariam. */
+.abertura__titulo .marca-texto{
+  color:var(--preto);
+  background:var(--amarelo);
+  padding:0 .12em;
+  border-radius:4px;
+  white-space:nowrap;
+  box-decoration-break:clone;
+  -webkit-box-decoration-break:clone;
 }
 
 /* O mecanismo do site é uma sequência de verdade: escolher, montar,
@@ -828,11 +843,13 @@ button,a,summary,label{touch-action:manipulation}
 
 <header class="topo">
   <div class="conteudo topo__interno">
-    <div class="marca">
-      <img id="logo" class="marca__logo" src="fotos/logo.jpg" alt="França Pipas" width="640" height="640">
-      <span id="marca-texto" class="marca__texto" hidden>França Pipas</span>
+    <!-- alt vazio de propósito: o nome está escrito ao lado, e alt
+         repetido faria o leitor de tela ler a marca duas vezes -->
+    <img id="logo" class="marca__logo" src="fotos/logo.jpg" alt="" width="640" height="640">
+    <div class="topo__nome">
+      <p class="topo__loja">França Pipas</p>
+      <p class="topo__local">Francisco Morato · SP</p>
     </div>
-    <p class="topo__local">Francisco Morato · SP</p>
     <button type="button" class="carrinho-botao" id="abrir-carrinho" data-vazio="sim">
       Pedido <span class="carrinho-botao__conta" id="conta-topo">0</span>
     </button>
@@ -842,7 +859,7 @@ button,a,summary,label{touch-action:manipulation}
 <main>
   <section class="abertura">
     <div class="conteudo">
-      <h1 class="abertura__titulo">Feito pra durar mais de uma temporada</h1>
+      <h1 class="abertura__titulo">Feito pra <span class="marca-texto">durar</span> mais de uma temporada</h1>
       <ol class="passos">
         <li class="passos__item"><span class="passos__n">1</span><span class="passos__t">Escolhe o produto</span></li>
         <li class="passos__item"><span class="passos__n">2</span><span class="passos__t">Monta o pedido</span></li>
@@ -1629,10 +1646,11 @@ function montaFiltros(){
 
 /* ---------------- ligações ---------------- */
 
+// se o arquivo da logo sumir, só ela some: o nome da loja continua
+// escrito ao lado, então o cabeçalho não fica sem marca
 function ajustaLogo(){
   const logo = document.getElementById('logo');
-  const texto = document.getElementById('marca-texto');
-  function semLogo(){ logo.hidden = true; texto.hidden = false; }
+  function semLogo(){ logo.hidden = true; }
   logo.addEventListener('error', semLogo);
   if (logo.complete && logo.naturalWidth === 0) semLogo();
 }
