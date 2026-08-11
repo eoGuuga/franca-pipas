@@ -281,11 +281,54 @@ button,a,summary,label{touch-action:manipulation}
   max-width:24ch;
 }
 
-.abertura__linha{
-  margin-top:.55rem;
-  max-width:46ch;
-  color:var(--tinta-fraca);
-  font-size:clamp(.95rem,2.6vw,1.05rem);
+/* O mecanismo do site é uma sequência de verdade: escolher, montar,
+   mandar. Por isso vai numerado — o número carrega a ordem, não é
+   enfeite. Marcado como <ol> pra o leitor de tela receber a ordem
+   junto. A cor da marca fica concentrada nas três bolinhas, em vez
+   de virar um bloco colorido brigando com a foto dos produtos. */
+.passos{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:.5rem;
+  max-width:34rem;
+  margin-top:.9rem;
+  padding:.9rem .7rem;
+  background:var(--branco);
+  border:var(--traco) solid var(--preto);
+  border-radius:8px;
+  box-shadow:var(--sombra);
+}
+
+.passos__item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:.45rem;
+  text-align:center;
+}
+
+.passos__n{
+  display:grid;
+  place-items:center;
+  width:30px;
+  height:30px;
+  font-size:1rem;
+  font-weight:900;
+  font-style:italic;
+  line-height:1;
+  background:var(--amarelo);
+  border:2px solid var(--preto);
+  border-radius:50%;
+}
+
+/* itálico pesado dá voz própria pra instrução sem carregar fonte
+   nova: o eixo itálico do Archivo já vem no mesmo arquivo */
+.passos__t{
+  font-size:clamp(.76rem,2.2vw,.92rem);
+  font-style:italic;
+  font-weight:700;
+  font-stretch:88%;
+  line-height:1.2;
 }
 
 /* ---------- filtros ---------- */
@@ -800,7 +843,11 @@ button,a,summary,label{touch-action:manipulation}
   <section class="abertura">
     <div class="conteudo">
       <h1 class="abertura__titulo">Feito pra durar mais de uma temporada</h1>
-      <p class="abertura__linha">Escolhe aqui, monta o pedido e manda no WhatsApp.</p>
+      <ol class="passos">
+        <li class="passos__item"><span class="passos__n">1</span><span class="passos__t">Escolhe o produto</span></li>
+        <li class="passos__item"><span class="passos__n">2</span><span class="passos__t">Monta o pedido</span></li>
+        <li class="passos__item"><span class="passos__n">3</span><span class="passos__t">Manda no WhatsApp</span></li>
+      </ol>
     </div>
   </section>
 
