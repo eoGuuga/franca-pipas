@@ -2,32 +2,45 @@
 
 ---
 
-## Recorte de fundo: SEMPRE conferir o topo da pipa
+## PIPA NÃO VAI PRA RECORTE DE FUNDO
 
-**Regra, aprendida na prática em 14/08/2026.**
+**Regra fechada em 14/08/2026. Não é "conferir com cuidado", é não
+rodar.**
 
-Produto com **haste, vareta, cabresto ou estirante no topo** tende a
-perder esse detalhe no recorte automático de fundo. A vareta tem
-poucos pixels e o modelo trata como ruído. O resultado é uma pipa que
-parece **quebrada** — e isso é alterar o produto, não remover fundo.
+Pipa tem **haste, vareta e cabresto finos demais**. O recorte
+automático trata isso como ruído e **sempre come alguma coisa**. O
+resultado é produto parecendo quebrado, e isso é **alterar o
+produto, não remover fundo** — o que a regra do projeto proíbe.
 
-**Se rodar recorte em foto nova de pipa, conferir especificamente o
-topo antes de aprovar.** Olhar a silhueta inteira não basta: o corpo
-sai perfeito e a haste some, então a foto passa numa olhada rápida.
+**O ganho de padronização não compensa.** Fundo bonito com pipa
+quebrada é pior que foto de chão de madeira com pipa inteira.
 
-Não dá pra detectar isso por número: perder uma vareta de 2 px não
-move área nem alfa parcial. **Só olho pega.**
+Vale pra qualquer produto de pipa: Baruel, caçadeira, latão laminado,
+latão de seda, corte e recorte, mucha, vazada, flechinha, peixinho.
 
-Já aconteceu uma vez: 27 fotos foram publicadas recortadas e tiveram
-que voltar para a original —
+### Como isso foi descoberto, em duas rodadas
 
-| produto | fotos revertidas |
+Chegou ao ar recortado e teve que voltar:
+
+| rodada | fotos revertidas |
 |---|---|
-| Pipa de latão laminado 60 cm | 10 (todas) |
-| Pipa de latão de seda 60 cm | 14 (todas) |
-| Pipa corte e recorte 80 cm | 1 (a última da tira) |
-| Pipa Baruel 55 cm | 1 (a principal) |
-| Pipa caçadeira 62 cm | 1 (a principal) |
+| 1ª — haste cortada, achada pelo dono no site | 27 |
+| 2ª — decisão de tirar pipa do recorte de vez | 15 |
+| **total** | **42** |
+
+**Por que a conferência não pegou:** aprovei olhando folha de contato
+com miniatura de ~110 px. Nesse tamanho o corpo da pipa domina e a
+vareta de 2 px não aparece. Quem pegou foi o dono, olhando o site em
+tamanho real.
+
+**Nem número pega:** perder uma vareta de 2 px não move área nem alfa
+parcial na triagem. Só olho, e só em tamanho grande.
+
+### Onde o recorte continua valendo
+
+Carretilha, linha em cone, cola, engomador, base de corte — produto
+de silhueta cheia, sem apêndice fino. Esses passaram e continuam
+recortados.
 
 As originais ficam intactas em `fotos-organizadas/produtos/`, que o
 recorte nunca toca. Reverter é copiar de lá para `fotos/produtos/`.
