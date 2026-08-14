@@ -487,6 +487,7 @@ button,a,summary,label{touch-action:manipulation}
 .produto--esgotado .foto img{filter:grayscale(1);opacity:.55}
 
 .selo{display:inline-flex;align-items:center;gap:.3rem;margin:.6rem .75rem 0;padding:.3rem .5rem;font-size:.6rem;font-weight:800;font-stretch:78%;text-transform:uppercase;letter-spacing:.06em;color:var(--preto);background:var(--amarelo);border:1.5px solid var(--preto);border-radius:4px}
+.selo--escolha{background:var(--azul-vivo)}
 .produto__nota{padding:.3rem .75rem 0;color:var(--tinta-fraca);font-size:.68rem;font-weight:700}
 .produto__nota b{color:var(--tinta);font-weight:800}
 .fonte-dados{margin-top:1rem;color:var(--tinta-fraca);font-size:.7rem}
@@ -1186,6 +1187,86 @@ const PRODUTOS = [
     ]
   },
   {
+    nome: "Carretilha de madeira pintada 12 polegadas",
+    categoria: "Carretilhas",
+    medida: "",
+    preco: null,
+    escolha: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-01.webp",
+        alt: "Carretilha pintada de preto com um ioiô branco no centro e letras em volta da borda" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-02.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-03.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-04.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-05.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-06.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-07.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-08.webp" }
+    ]
+  },
+  {
+    nome: "Carretilha de madeira pintada 15 polegadas",
+    categoria: "Carretilhas",
+    medida: "",
+    preco: null,
+    escolha: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/carretilha-pintada-15-pol/carretilha-pintada-15-pol-01.webp",
+        alt: "Carretilha pintada com estrelas coloridas sobre fundo claro, vista de frente" },
+      { arquivo: "fotos/produtos/carretilha-pintada-15-pol/carretilha-pintada-15-pol-02.webp" }
+    ]
+  },
+  {
+    nome: "Carretilha de madeira pintada 18 polegadas, catracada",
+    categoria: "Carretilhas",
+    medida: "",
+    preco: null,
+    escolha: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/carretilha-pintada-18-pol/carretilha-pintada-18-pol-01.webp",
+        alt: "Carretilha pintada em espiral colorida, com verde, azul, roxo e amarelo" },
+      { arquivo: "fotos/produtos/carretilha-pintada-18-pol/carretilha-pintada-18-pol-02.webp" }
+    ]
+  },
+  {
+    nome: "Carretilha ProMax 20 polegadas",
+    categoria: "Carretilhas",
+    medida: "",
+    preco: null,
+    escolha: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-01.webp",
+        alt: "Carretilha preta com desenho de mandala em rosa e verde, vista de frente" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-02.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-03.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-04.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-05.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-06.webp" }
+    ]
+  },
+  {
+    nome: "Carretilha ProMax 22 polegadas",
+    categoria: "Carretilhas",
+    medida: "",
+    preco: null,
+    escolha: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-01.webp",
+        alt: "Carretilha com mandala colorida em vermelho, azul e amarelo sobre fundo preto" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-02.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-03.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-04.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-05.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-06.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-07.webp" }
+    ]
+  },
+  {
     nome: "Carretilha com catraca destravada e linha Vera Cruz",
     categoria: "Carretilhas",
     medida: "16 polegadas",
@@ -1210,81 +1291,6 @@ const PRODUTOS = [
       { arquivo: "fotos/produtos/carretilha-crua-madeira-compensado-naval/carretilha-crua-madeira-compensado-naval-03.webp" },
       { arquivo: "fotos/produtos/carretilha-crua-madeira-compensado-naval/carretilha-crua-madeira-compensado-naval-04.webp" },
       { arquivo: "fotos/produtos/carretilha-crua-madeira-compensado-naval/carretilha-crua-madeira-compensado-naval-05.webp" }
-    ]
-  },
-  {
-    nome: "Carretilha de madeira pintada 12 polegadas",
-    categoria: "Carretilhas",
-    medida: "",
-    preco: null,
-    estoque: true,
-    fotos: [
-      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-01.webp",
-        alt: "Carretilha pintada de preto com um ioiô branco no centro e letras em volta da borda" },
-      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-02.webp" },
-      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-03.webp" },
-      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-04.webp" },
-      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-05.webp" },
-      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-06.webp" },
-      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-07.webp" },
-      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-08.webp" }
-    ]
-  },
-  {
-    nome: "Carretilha de madeira pintada 15 polegadas",
-    categoria: "Carretilhas",
-    medida: "",
-    preco: null,
-    estoque: true,
-    fotos: [
-      { arquivo: "fotos/produtos/carretilha-pintada-15-pol/carretilha-pintada-15-pol-01.webp",
-        alt: "Carretilha pintada com estrelas coloridas sobre fundo claro, vista de frente" },
-      { arquivo: "fotos/produtos/carretilha-pintada-15-pol/carretilha-pintada-15-pol-02.webp" }
-    ]
-  },
-  {
-    nome: "Carretilha de madeira pintada 18 polegadas, catracada",
-    categoria: "Carretilhas",
-    medida: "",
-    preco: null,
-    estoque: true,
-    fotos: [
-      { arquivo: "fotos/produtos/carretilha-pintada-18-pol/carretilha-pintada-18-pol-01.webp",
-        alt: "Carretilha pintada em espiral colorida, com verde, azul, roxo e amarelo" },
-      { arquivo: "fotos/produtos/carretilha-pintada-18-pol/carretilha-pintada-18-pol-02.webp" }
-    ]
-  },
-  {
-    nome: "Carretilha ProMax 20 polegadas",
-    categoria: "Carretilhas",
-    medida: "",
-    preco: null,
-    estoque: true,
-    fotos: [
-      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-01.webp",
-        alt: "Carretilha preta com desenho de mandala em rosa e verde, vista de frente" },
-      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-02.webp" },
-      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-03.webp" },
-      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-04.webp" },
-      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-05.webp" },
-      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-06.webp" }
-    ]
-  },
-  {
-    nome: "Carretilha ProMax 22 polegadas",
-    categoria: "Carretilhas",
-    medida: "",
-    preco: null,
-    estoque: true,
-    fotos: [
-      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-01.webp",
-        alt: "Carretilha com mandala colorida em vermelho, azul e amarelo sobre fundo preto" },
-      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-02.webp" },
-      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-03.webp" },
-      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-04.webp" },
-      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-05.webp" },
-      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-06.webp" },
-      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-07.webp" }
     ]
   },
   {
@@ -1781,6 +1787,13 @@ function montaCard(produto, indice){
     const selo = document.createElement('p');
     selo.className = 'selo';
     selo.textContent = 'Entre os mais vendidos na Shopee';
+    card.appendChild(selo);
+  } else if (produto.escolha) {
+    // sem numero de venda por tras: selo diz so o que e verdade,
+    // que a loja escolheu destacar
+    const selo = document.createElement('p');
+    selo.className = 'selo selo--escolha';
+    selo.textContent = 'Escolha da loja';
     card.appendChild(selo);
   }
 
