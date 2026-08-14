@@ -16,7 +16,7 @@
      ========================================================= -->
 
 <title>França Pipas — pipa, carretilha e linha, atacado e varejo em Francisco Morato</title>
-<meta name="description" content="Carretilha, linha, pipa e rabiola de acabamento caprichado, no atacado e no varejo. Francisco Morato, SP. Monte o pedido e mande pelo WhatsApp.">
+<meta name="description" content="Carretilha, linha, pipa e rabiola de acabamento caprichado, no atacado e no varejo. Francisco Morato, SP. Monte sua lista e pergunte pelo WhatsApp.">
 <link rel="canonical" href="https://eoguuga.github.io/franca-pipas/">
 <meta name="theme-color" content="#04153E">
 
@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="França Pipas">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="França Pipas — carretilha, linha e pipa no atacado e varejo">
-<meta property="og:description" content="Monte seu pedido e mande pelo WhatsApp. Varejo e atacado, Francisco Morato, SP.">
+<meta property="og:description" content="Monte sua lista e pergunte pelo WhatsApp. Varejo e atacado, Francisco Morato, SP.">
 <meta property="og:url" content="https://eoguuga.github.io/franca-pipas/">
 <meta property="og:image" content="https://eoguuga.github.io/franca-pipas/fotos/link-whatsapp.jpg">
 <meta property="og:image:type" content="image/jpeg">
@@ -762,28 +762,6 @@ button,a,summary,label{touch-action:manipulation}
 
 .ficha__alt{margin-top:.7rem;color:var(--tinta-fraca);font-size:.8rem}
 
-/* --- quantidade --- */
-
-.qtd{display:flex;align-items:center;gap:.6rem}
-
-.qtd__botao{
-  display:grid;
-  place-items:center;
-  width:38px;
-  height:38px;
-  font-family:inherit;
-  font-size:1.15rem;
-  line-height:1;
-  cursor:pointer;
-  background:var(--branco);
-  border:1.5px solid var(--preto);
-  border-radius:6px;
-}
-
-.qtd__botao:hover{background:var(--papel)}
-.qtd__botao:disabled{opacity:.35;cursor:default}
-.qtd__valor{min-width:2ch;text-align:center;font-weight:800;font-size:1rem}
-
 .ficha__acao{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
 .ficha__acao .botao{flex:1;min-width:11rem}
 
@@ -857,7 +835,7 @@ button,a,summary,label{touch-action:manipulation}
       <p class="topo__local">Francisco Morato · SP</p>
     </div>
     <button type="button" class="carrinho-botao" id="abrir-carrinho" data-vazio="sim">
-      Pedido <span class="carrinho-botao__conta" id="conta-topo">0</span>
+      Minha lista <span class="carrinho-botao__conta" id="conta-topo">0</span>
     </button>
   </div>
 </header>
@@ -868,7 +846,7 @@ button,a,summary,label{touch-action:manipulation}
       <h1 class="abertura__titulo">Feito pra <span class="marca-texto">durar</span> mais de uma temporada</h1>
       <ol class="passos">
         <li class="passos__item"><span class="passos__n">1</span><span class="passos__t">Escolhe o produto</span></li>
-        <li class="passos__item"><span class="passos__n">2</span><span class="passos__t">Monta o pedido</span></li>
+        <li class="passos__item"><span class="passos__n">2</span><span class="passos__t">Monta a lista</span></li>
         <li class="passos__item"><span class="passos__n">3</span><span class="passos__t">Manda no WhatsApp</span></li>
       </ol>
     </div>
@@ -900,13 +878,13 @@ button,a,summary,label{touch-action:manipulation}
   <div class="confirma__topo">
     <div class="confirma__foto"><img id="confirma-foto" src="" alt=""></div>
     <div class="confirma__dados">
-      <p class="confirma__selo">Produto adicionado</p>
+      <p class="confirma__selo">Adicionado à lista</p>
       <p class="confirma__nome" id="confirma-nome"></p>
     </div>
     <button type="button" class="fechar" id="confirma-fechar" aria-label="Fechar aviso">&times;</button>
   </div>
   <div class="confirma__acoes">
-    <button type="button" class="botao" id="confirma-ver">Ver pedido</button>
+    <button type="button" class="botao" id="confirma-ver">Ver minha lista</button>
     <button type="button" class="botao-simples" id="confirma-seguir">Continuar comprando</button>
   </div>
 </div>
@@ -915,7 +893,7 @@ button,a,summary,label{touch-action:manipulation}
 <div class="barra-pedido" id="barra-pedido">
   <a class="botao botao--claro" id="barra-zap" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
   <button type="button" class="botao" id="abrir-carrinho-barra">
-    Ver pedido <span class="barra-conta" id="conta-barra">0</span>
+    Ver minha lista <span class="barra-conta" id="conta-barra">0</span>
   </button>
 </div>
 
@@ -930,7 +908,7 @@ button,a,summary,label{touch-action:manipulation}
 
 <dialog class="modal" id="modal-carrinho" aria-labelledby="pedido-titulo">
   <div class="modal__topo">
-    <p class="modal__titulo" id="pedido-titulo">Seu pedido</p>
+    <p class="modal__titulo" id="pedido-titulo">Sua lista</p>
     <button type="button" class="fechar" data-fechar aria-label="Fechar">&times;</button>
   </div>
   <div class="modal__rolagem" id="pedido-lista"></div>
@@ -969,6 +947,10 @@ const NUMERO = '5511954871911';
    preco     número - só o número, ponto no lugar da vírgula
                       (189.90). Escreva null (sem aspas) pra
                       aparecer "Sob consulta".
+   apartir   true   - opcional. Use quando o anúncio tem FAIXA de
+                      preço e esse é o menor valor: aparece
+                      "A partir de R$ 40,00" no lugar de "R$ 40,00".
+                      Não escreva nada quando o preço é fechado.
    estoque   true / false - false mostra "Esgotado no momento"
                       no lugar do botão de pedido
    fotos     lista  - ver abaixo
@@ -997,67 +979,490 @@ const NUMERO = '5511954871911';
    ============================================================ */
 const PRODUTOS = [
   {
-    nome: 'Carretilha com catraca destravada',
-    categoria: 'Carretilhas',
-    medida: '16 polegadas',
-    preco: null,
+    nome: "Carretilha com catraca destravada e linha Vera Cruz",
+    categoria: "Carretilhas",
+    medida: "16 polegadas",
+    preco: 243,
     estoque: true,
     fotos: [
-      { arquivo: 'fotos/carretilha-16-polegadas.webp',
-        alt: 'Carretilha de madeira clara vista de frente, vazada por furos redondos de vários tamanhos formando espiral' },
-      { arquivo: 'fotos/carretilha-16-polegadas-mecanismo.webp',
-        alt: 'Centro da carretilha em close, com o eixo escuro de metal e o aro externo de madeira' },
-      { arquivo: 'fotos/carretilha-16-polegadas-com-linha.webp',
-        alt: 'A carretilha atrás de três cones de linha Vera Cruz, nas cores azul, amarela e laranja' }
+      { arquivo: "fotos/produtos/carretilha-16-pol-com-linha-vera-cruz/carretilha-16-pol-com-linha-vera-cruz-01.webp",
+        alt: "Carretilha de madeira clara com eixo de metal no centro, apoiada sobre um monte de varetas de bambu" },
+      { arquivo: "fotos/produtos/carretilha-16-pol-com-linha-vera-cruz/carretilha-16-pol-com-linha-vera-cruz-02.webp" }
     ]
   },
   {
-    nome: 'Carretilha de madeira pintada',
-    categoria: 'Carretilhas',
-    medida: '18 polegadas',
-    preco: null,
+    nome: "Carretilha crua de compensado naval",
+    categoria: "Carretilhas",
+    medida: "12 a 24 polegadas",
+    preco: 114,
     estoque: true,
     fotos: [
-      { arquivo: 'fotos/carretilha-18-polegadas-pintada-vitral.webp',
-        alt: 'Carretilha pintada com desenho de vitral, em faixas coloridas contornadas de preto' },
-      { arquivo: 'fotos/carretilha-18-polegadas-pintada-espiral.webp',
-        alt: 'Carretilha pintada com espiral e raios coloridos saindo do centro' }
+      { arquivo: "fotos/produtos/carretilha-crua-madeira-compensado-naval/carretilha-crua-madeira-compensado-naval-01.webp",
+        alt: "Carretilha de compensado claro sem pintura, com furos redondos em duas fileiras" }
     ]
   },
   {
-    nome: 'Carretilha crua de madeira',
-    categoria: 'Carretilhas',
-    medida: '',
+    nome: "Carretilha de madeira pintada 12 polegadas",
+    categoria: "Carretilhas",
+    medida: "",
     preco: null,
     estoque: true,
     fotos: [
-      { arquivo: 'fotos/carretilha-crua-madeira.webp',
-        alt: 'Carretilha de madeira sem pintura, de frente, com furos redondos em círculos concêntricos' },
-      { arquivo: 'fotos/carretilha-crua-madeira-verso.webp',
-        alt: 'Verso da mesma carretilha, mostrando o cubo de madeira no centro e o encaixe do eixo' }
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-01.webp",
+        alt: "Carretilha pintada de preto com um ioiô branco no centro e letras em volta da borda" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-02.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-03.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-04.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-05.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-06.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-07.webp" },
+      { arquivo: "fotos/produtos/carretilha-pintada-12-pol/carretilha-pintada-12-pol-08.webp" }
     ]
   },
   {
-    nome: 'Pipa de latão laminado 60 cm',
-    categoria: 'Pipas',
-    medida: 'Kit com 5 ou 10 unidades',
+    nome: "Carretilha de madeira pintada 15 polegadas",
+    categoria: "Carretilhas",
+    medida: "",
     preco: null,
     estoque: true,
     fotos: [
-      { arquivo: 'fotos/kit-pipa-latao-60cm-dourado.webp',  opcao: 'dourada',
-        alt: 'Pipa de latão laminado dourado, em losango, com a vareta atravessada' },
-      { arquivo: 'fotos/kit-pipa-latao-60cm-azul.webp',     opcao: 'azul',
-        alt: 'Pipa de latão laminado azul, em losango' },
-      { arquivo: 'fotos/kit-pipa-latao-60cm-vermelho.webp', opcao: 'vermelha',
-        alt: 'Pipa de latão laminado vermelho, em losango' },
-      { arquivo: 'fotos/kit-pipa-latao-60cm-preto.webp',    opcao: 'preta',
-        alt: 'Pipa de latão laminado preto, em losango' },
-      { arquivo: 'fotos/kit-pipa-latao-60cm-prata.webp',    opcao: 'prata',
-        alt: 'Pipa de latão laminado prateado espelhado, em losango' },
-      { arquivo: 'fotos/kit-pipa-latao-60cm-lilas.webp',    opcao: 'lilás',
-        alt: 'Pipa de latão laminado lilás, em losango' },
-      { arquivo: 'fotos/kit-pipa-latao-60cm-branco.webp',   opcao: 'branca',
-        alt: 'Pipa de latão laminado branco, em losango' }
+      { arquivo: "fotos/produtos/carretilha-pintada-15-pol/carretilha-pintada-15-pol-01.webp",
+        alt: "Carretilha pintada com estrelas coloridas sobre fundo claro, vista de frente" },
+      { arquivo: "fotos/produtos/carretilha-pintada-15-pol/carretilha-pintada-15-pol-02.webp" }
+    ]
+  },
+  {
+    nome: "Carretilha de madeira pintada 18 polegadas, catracada",
+    categoria: "Carretilhas",
+    medida: "",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/carretilha-pintada-18-pol/carretilha-pintada-18-pol-01.webp",
+        alt: "Carretilha pintada em espiral colorida, com verde, azul, roxo e amarelo" },
+      { arquivo: "fotos/produtos/carretilha-pintada-18-pol/carretilha-pintada-18-pol-02.webp" }
+    ]
+  },
+  {
+    nome: "Carretilha ProMax 20 polegadas",
+    categoria: "Carretilhas",
+    medida: "",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-01.webp",
+        alt: "Carretilha preta com desenho de mandala em rosa e verde, vista de frente" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-02.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-03.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-04.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-05.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-20-pol/carretilha-promax-20-pol-06.webp" }
+    ]
+  },
+  {
+    nome: "Carretilha ProMax 22 polegadas",
+    categoria: "Carretilhas",
+    medida: "",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-01.webp",
+        alt: "Carretilha com mandala colorida em vermelho, azul e amarelo sobre fundo preto" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-02.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-03.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-04.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-05.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-06.webp" },
+      { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-07.webp" }
+    ]
+  },
+  {
+    nome: "Flechinha laminada",
+    categoria: "Pipas",
+    medida: "38 x 38 cm · kit com 20",
+    preco: 40,
+    apartir: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-01.webp",
+        alt: "Pipa pequena de latão dourado em formato de losango, sobre fundo branco" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-02.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-03.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-04.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-05.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-06.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-07.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-08.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-09.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-10.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-11.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-12.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-13.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-14.webp" },
+      { arquivo: "fotos/produtos/flechinha-laminada-38x38/flechinha-laminada-38x38-15.webp" }
+    ]
+  },
+  {
+    nome: "Mini raia peixinho",
+    categoria: "Pipas",
+    medida: "30x30, 34x34 ou 38x38 · kit com 50",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/mini-raia-peixinho/mini-raia-peixinho-01.webp",
+        alt: "Pipas pequenas em formato de peixinho, em verde-água, sobre fundo claro" },
+      { arquivo: "fotos/produtos/mini-raia-peixinho/mini-raia-peixinho-02.webp" },
+      { arquivo: "fotos/produtos/mini-raia-peixinho/mini-raia-peixinho-03.webp" },
+      { arquivo: "fotos/produtos/mini-raia-peixinho/mini-raia-peixinho-04.webp" },
+      { arquivo: "fotos/produtos/mini-raia-peixinho/mini-raia-peixinho-05.webp" },
+      { arquivo: "fotos/produtos/mini-raia-peixinho/mini-raia-peixinho-06.webp" }
+    ]
+  },
+  {
+    nome: "Pipa Baruel",
+    categoria: "Pipas",
+    medida: "55 cm · kit com 10",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-baruel-55cm/pipa-baruel-55cm-01.webp",
+        alt: "Pipa roxa aberta, segurada pela vareta, com a rua ao fundo" },
+      { arquivo: "fotos/produtos/pipa-baruel-55cm/pipa-baruel-55cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-baruel-55cm/pipa-baruel-55cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-baruel-55cm/pipa-baruel-55cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-baruel-55cm/pipa-baruel-55cm-05.webp" },
+      { arquivo: "fotos/produtos/pipa-baruel-55cm/pipa-baruel-55cm-06.webp" },
+      { arquivo: "fotos/produtos/pipa-baruel-55cm/pipa-baruel-55cm-07.webp" },
+      { arquivo: "fotos/produtos/pipa-baruel-55cm/pipa-baruel-55cm-08.webp" }
+    ]
+  },
+  {
+    nome: "Pipa caçadeira, seda ou laminada",
+    categoria: "Pipas",
+    medida: "62 cm · kit com 5 ou 10",
+    preco: 40,
+    apartir: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-cacadeira-62cm/pipa-cacadeira-62cm-01.webp",
+        alt: "Pipa vermelha de laminado, apoiada em chão de madeira" },
+      { arquivo: "fotos/produtos/pipa-cacadeira-62cm/pipa-cacadeira-62cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-cacadeira-62cm/pipa-cacadeira-62cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-cacadeira-62cm/pipa-cacadeira-62cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-cacadeira-62cm/pipa-cacadeira-62cm-05.webp" },
+      { arquivo: "fotos/produtos/pipa-cacadeira-62cm/pipa-cacadeira-62cm-06.webp" }
+    ]
+  },
+  {
+    nome: "Pipa corte e recorte de seda",
+    categoria: "Pipas",
+    medida: "80 cm · kit com 5",
+    preco: 65,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-01.webp",
+        alt: "Pipa grande com recorte em Y, em verde-água, rosa, amarelo e preto, segurada pelo estirante" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-05.webp" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-06.webp" }
+    ]
+  },
+  {
+    nome: "Pipa corte e recorte laminada, com rabiola",
+    categoria: "Pipas",
+    medida: "Kit com 3 · rabiola de 15 m",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-corte-recorte-laminado-rabiola/pipa-corte-recorte-laminado-rabiola-01.webp",
+        alt: "Pipa verde com cruz amarela e preta, apoiada no chão" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-laminado-rabiola/pipa-corte-recorte-laminado-rabiola-02.webp" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-laminado-rabiola/pipa-corte-recorte-laminado-rabiola-03.webp" }
+    ]
+  },
+  {
+    nome: "Pipa de latão laminado 60 cm",
+    categoria: "Pipas",
+    medida: "Kit com 5 ou 10 unidades",
+    preco: 40,
+    apartir: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-01.webp",
+        alt: "Pipa de latão dourado espelhado, encostada numa parede branca" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-05.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-06.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-07.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-08.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-09.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-10.webp" }
+    ]
+  },
+  {
+    nome: "Pipa de latão de seda 60 cm",
+    categoria: "Pipas",
+    medida: "Kit com 5 ou 10 unidades",
+    preco: 40,
+    apartir: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-01.webp",
+        alt: "Pipa de seda em faixas azul, verde-clara e azul-escura, encostada na parede" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-05.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-06.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-07.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-08.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-09.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-10.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-11.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-12.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-13.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-14.webp" }
+    ]
+  },
+  {
+    nome: "Pipa mucha, laminado ou seda",
+    categoria: "Pipas",
+    medida: "60 cm · kit com 10",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-mucha-60cm/pipa-mucha-60cm-01.webp",
+        alt: "Pipa azul metálica em formato de mucha, com as varetas atravessadas" },
+      { arquivo: "fotos/produtos/pipa-mucha-60cm/pipa-mucha-60cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-mucha-60cm/pipa-mucha-60cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-mucha-60cm/pipa-mucha-60cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-mucha-60cm/pipa-mucha-60cm-05.webp" },
+      { arquivo: "fotos/produtos/pipa-mucha-60cm/pipa-mucha-60cm-06.webp" },
+      { arquivo: "fotos/produtos/pipa-mucha-60cm/pipa-mucha-60cm-07.webp" },
+      { arquivo: "fotos/produtos/pipa-mucha-60cm/pipa-mucha-60cm-08.webp" }
+    ]
+  },
+  {
+    nome: "Pipa mucha",
+    categoria: "Pipas",
+    medida: "70 cm · kit com 5 ou 10",
+    preco: 35,
+    apartir: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-mucha-70cm/pipa-mucha-70cm-01.webp",
+        alt: "Pipa rosa metálica em formato de mucha, sobre piso claro" },
+      { arquivo: "fotos/produtos/pipa-mucha-70cm/pipa-mucha-70cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-mucha-70cm/pipa-mucha-70cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-mucha-70cm/pipa-mucha-70cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-mucha-70cm/pipa-mucha-70cm-05.webp" }
+    ]
+  },
+  {
+    nome: "Pipa vazada com rabiola e estirante",
+    categoria: "Pipas",
+    medida: "80 cm · kit com 4",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-vazada-80cm-rabiola-estirante/pipa-vazada-80cm-rabiola-estirante-01.webp",
+        alt: "Pipa com estampa de bandeira americana, listras vermelhas e brancas e estrelas" },
+      { arquivo: "fotos/produtos/pipa-vazada-80cm-rabiola-estirante/pipa-vazada-80cm-rabiola-estirante-02.webp" },
+      { arquivo: "fotos/produtos/pipa-vazada-80cm-rabiola-estirante/pipa-vazada-80cm-rabiola-estirante-03.webp" }
+    ]
+  },
+  {
+    nome: "Kit linha de armação com fita solar",
+    categoria: "Linhas",
+    medida: "5000 metros",
+    preco: 62,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/kit-linha-armacao-fita-solar/kit-linha-armacao-fita-solar-01.webp",
+        alt: "Cone de linha branca ao lado de um rolo de fita azul" },
+      { arquivo: "fotos/produtos/kit-linha-armacao-fita-solar/kit-linha-armacao-fita-solar-02.webp" },
+      { arquivo: "fotos/produtos/kit-linha-armacao-fita-solar/kit-linha-armacao-fita-solar-03.webp" }
+    ]
+  },
+  {
+    nome: "Linha para pipa",
+    categoria: "Linhas",
+    medida: "100 jardas · pacote com 24",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-100-jardas-pct-24/linha-100-jardas-pct-24-01.webp",
+        alt: "Quatro carretéis pequenos de linha branca com tampa vermelha, deitados" },
+      { arquivo: "fotos/produtos/linha-100-jardas-pct-24/linha-100-jardas-pct-24-02.webp" },
+      { arquivo: "fotos/produtos/linha-100-jardas-pct-24/linha-100-jardas-pct-24-03.webp" },
+      { arquivo: "fotos/produtos/linha-100-jardas-pct-24/linha-100-jardas-pct-24-04.webp" }
+    ]
+  },
+  {
+    nome: "Linha Bold Line 10.3 Edição Egípcia",
+    categoria: "Linhas",
+    medida: "12.000 jardas · tex 100",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-bold-line-10-3-egipcia/linha-bold-line-10-3-egipcia-01.webp",
+        alt: "Pote preto da linha Bold Line 10.3 Edição Especial, com arte egípcia no rótulo" }
+    ]
+  },
+  {
+    nome: "Linha Bold Line 10.6 Extra Premium",
+    categoria: "Linhas",
+    medida: "4000 jardas · tex 197",
+    preco: 179.55,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-bold-line-10-6-premium/linha-bold-line-10-6-premium-01.webp",
+        alt: "Cone de linha verde-escura embalado, com etiqueta laranja Bold Line 10.6" },
+      { arquivo: "fotos/produtos/linha-bold-line-10-6-premium/linha-bold-line-10-6-premium-02.webp" },
+      { arquivo: "fotos/produtos/linha-bold-line-10-6-premium/linha-bold-line-10-6-premium-03.webp" }
+    ]
+  },
+  {
+    nome: "Linha Bold Line 3.3 Extra Premium",
+    categoria: "Linhas",
+    medida: "6000 jardas · tex 148",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-bold-line-3-3-premium/linha-bold-line-3-3-premium-01.webp",
+        alt: "Cone de linha verde-clara embalado, com etiqueta laranja Bold Line 3.3" },
+      { arquivo: "fotos/produtos/linha-bold-line-3-3-premium/linha-bold-line-3-3-premium-02.webp" }
+    ]
+  },
+  {
+    nome: "Linha extra forte",
+    categoria: "Linhas",
+    medida: "60 jardas · pacote com 24",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-extra-forte-60-jardas-pct-24/linha-extra-forte-60-jardas-pct-24-01.webp",
+        alt: "Quatro carretéis pequenos de linha branca com tampa preta, deitados" },
+      { arquivo: "fotos/produtos/linha-extra-forte-60-jardas-pct-24/linha-extra-forte-60-jardas-pct-24-02.webp" }
+    ]
+  },
+  {
+    nome: "Linha engomada Joia Rara Especial 4",
+    categoria: "Linhas",
+    medida: "6000 jardas",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-joia-rara-especial-4/linha-joia-rara-especial-4-01.webp",
+        alt: "Rolo grande de linha branca com etiqueta redonda, segurado na mão" },
+      { arquivo: "fotos/produtos/linha-joia-rara-especial-4/linha-joia-rara-especial-4-02.webp" },
+      { arquivo: "fotos/produtos/linha-joia-rara-especial-4/linha-joia-rara-especial-4-03.webp" }
+    ]
+  },
+  {
+    nome: "Linha de nylon Roca",
+    categoria: "Linhas",
+    medida: "3000 jardas",
+    preco: 35,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-nylon-roca-3mil-jardas/linha-nylon-roca-3mil-jardas-01.webp",
+        alt: "Rolos de linha de nylon empilhados em branco, laranja, verde, amarelo e azul" }
+    ]
+  },
+  {
+    nome: "Linha Vera Cruz fio 10",
+    categoria: "Linhas",
+    medida: "6000 jardas",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-10-6000-jardas/linha-vera-cruz-fio-10-6000-jardas-01.webp",
+        alt: "Cone de linha rosa embalado, com rótulo amarelo Vera Cruz fio 10" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-10-6000-jardas/linha-vera-cruz-fio-10-6000-jardas-02.webp" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-10-6000-jardas/linha-vera-cruz-fio-10-6000-jardas-03.webp" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-10-6000-jardas/linha-vera-cruz-fio-10-6000-jardas-04.webp" }
+    ]
+  },
+  {
+    nome: "Linha Vera Cruz fio 4",
+    categoria: "Linhas",
+    medida: "",
+    preco: 75,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4/linha-vera-cruz-fio-4-01.webp",
+        alt: "Cone de linha vermelha com rótulo amarelo Vera Cruz, sem embalagem" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4/linha-vera-cruz-fio-4-02.webp" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4/linha-vera-cruz-fio-4-03.webp" }
+    ]
+  },
+  {
+    nome: "Linha Vera Cruz fio 4, 1500 jardas",
+    categoria: "Linhas",
+    medida: "",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4-1500-jardas/linha-vera-cruz-fio-4-1500-jardas-01.webp",
+        alt: "Cone de linha roxa embalado, com rótulo Vera Cruz fio 4" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4-1500-jardas/linha-vera-cruz-fio-4-1500-jardas-02.webp" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4-1500-jardas/linha-vera-cruz-fio-4-1500-jardas-03.webp" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4-1500-jardas/linha-vera-cruz-fio-4-1500-jardas-04.webp" }
+    ]
+  },
+  {
+    nome: "Linha Vera Cruz fio 4, 3000 jardas",
+    categoria: "Linhas",
+    medida: "",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4-3000-jardas/linha-vera-cruz-fio-4-3000-jardas-01.webp",
+        alt: "Cone de linha vermelha embalado, com rótulo amarelo Vera Cruz fio 4" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4-3000-jardas/linha-vera-cruz-fio-4-3000-jardas-02.webp" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4-3000-jardas/linha-vera-cruz-fio-4-3000-jardas-03.webp" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4-3000-jardas/linha-vera-cruz-fio-4-3000-jardas-04.webp" }
+    ]
+  },
+  {
+    nome: "Base de corte A1 para produção de pipas",
+    categoria: "Acessórios",
+    medida: "60 x 90 cm",
+    preco: 113.05,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/base-de-corte-a1/base-de-corte-a1-01.webp",
+        alt: "Duas bases de corte verdes com grade impressa, uma retangular grande e uma redonda pequena" },
+      { arquivo: "fotos/produtos/base-de-corte-a1/base-de-corte-a1-02.webp" }
+    ]
+  },
+  {
+    nome: "Cola vegetal resinada colorida",
+    categoria: "Acessórios",
+    medida: "1 kg",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/cola-vegetal-resinada/cola-vegetal-resinada-01.webp",
+        alt: "Quatro frascos de cola colorida, nas cores amarelo, rosa, verde e laranja, em embalagem plástica" }
+    ]
+  },
+  {
+    nome: "Engomador de linha Submarino, cola com resina",
+    categoria: "Acessórios",
+    medida: "500 g",
+    preco: 20,
+    apartir: true,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/engomador-cola-resina-submarino/engomador-cola-resina-submarino-01.webp",
+        alt: "Três potes brancos de engomador com etiqueta da França Pipas" },
+      { arquivo: "fotos/produtos/engomador-cola-resina-submarino/engomador-cola-resina-submarino-02.webp" }
     ]
   }
 ];
@@ -1233,7 +1638,9 @@ function montaCard(produto, indice){
   const preco = precoEmReais(produto.preco);
   const linhaPreco = document.createElement('p');
   linhaPreco.className = 'produto__preco' + (preco ? '' : ' produto__preco--consulta');
-  linhaPreco.textContent = preco ? preco : 'Sob consulta';
+  linhaPreco.textContent = preco
+    ? (produto.apartir ? 'A partir de ' + preco : preco)
+    : 'Sob consulta';
   card.appendChild(linhaPreco);
 
   if (produto.estoque) {
@@ -1242,8 +1649,8 @@ function montaCard(produto, indice){
     const bt = document.createElement('button');
     bt.type = 'button';
     bt.className = 'botao botao--bloco';
-    bt.textContent = 'Adicionar';
-    bt.setAttribute('aria-label', 'Adicionar ' + produto.nome + ' ao pedido');
+    bt.textContent = 'Quero este';
+    bt.setAttribute('aria-label', 'Quero ' + produto.nome + ', adicionar à minha lista');
     // adiciona a foto que estiver escolhida na tira — se o card deixa
     // escolher a cor, o botão tem que respeitar a escolha
     bt.addEventListener('click', function(){
@@ -1271,8 +1678,6 @@ function abrirProduto(indice){
   const base  = document.getElementById('ficha-base');
   ficha.replaceChildren();
   base.replaceChildren();
-
-  let quantidade = 1;
 
   const linhaOpcao = document.createElement('p');
   linhaOpcao.className = 'ficha__opcao';
@@ -1315,57 +1720,25 @@ function abrirProduto(indice){
   const preco = precoEmReais(produto.preco);
   const linhaPreco = document.createElement('p');
   linhaPreco.className = 'ficha__preco' + (preco ? '' : ' ficha__preco--consulta');
-  linhaPreco.textContent = preco ? preco : 'Sob consulta — o valor fecha na conversa';
+  linhaPreco.textContent = preco
+    ? (produto.apartir ? 'A partir de ' + preco + ' — o valor final depende da combinação' : preco)
+    : 'Sob consulta — o valor fecha na conversa';
   ficha.appendChild(linhaPreco);
 
   ficha.appendChild(legenda);
 
-  // ---- base: quantidade + adicionar ----
+  // ---- base: só a ação. Sem quantidade: a vitrine não controla
+  //      estoque, então quem define quanto sai é a loja na conversa.
   if (produto.estoque) {
-    const acao = document.createElement('div');
-    acao.className = 'ficha__acao';
-
-    const cx = document.createElement('div');
-    cx.className = 'qtd';
-
-    const menos = document.createElement('button');
-    menos.type = 'button';
-    menos.className = 'qtd__botao';
-    menos.textContent = '−';
-    menos.setAttribute('aria-label', 'Diminuir quantidade');
-
-    const valor = document.createElement('span');
-    valor.className = 'qtd__valor';
-    valor.setAttribute('aria-live', 'polite');
-    valor.textContent = '1';
-
-    const mais = document.createElement('button');
-    mais.type = 'button';
-    mais.className = 'qtd__botao';
-    mais.textContent = '+';
-    mais.setAttribute('aria-label', 'Aumentar quantidade');
-
-    function pinta(){
-      valor.textContent = String(quantidade);
-      menos.disabled = quantidade <= 1;
-    }
-    menos.addEventListener('click', function(){ if (quantidade > 1) { quantidade--; pinta(); } });
-    mais.addEventListener('click', function(){ if (quantidade < 99) { quantidade++; pinta(); } });
-    pinta();
-
-    cx.append(menos, valor, mais);
-
     const bt = document.createElement('button');
     bt.type = 'button';
-    bt.className = 'botao';
-    bt.textContent = 'Adicionar ao pedido';
+    bt.className = 'botao botao--bloco';
+    bt.textContent = 'Quero este';
     bt.addEventListener('click', function(){
-      adicionar(produto, galeria.fotoAtual(), quantidade);
+      adicionar(produto, galeria.fotoAtual());
       modalProduto.close();
     });
-
-    acao.append(cx, bt);
-    base.appendChild(acao);
+    base.appendChild(bt);
   } else {
     const p = document.createElement('p');
     p.className = 'esgotado';
@@ -1384,23 +1757,20 @@ function chave(produto, foto){
   return produto.nome + '||' + (foto && foto.opcao ? foto.opcao : '');
 }
 
-function adicionar(produto, foto, quantidade){
+// item já na lista não duplica: é lista de consulta, não pedido
+function adicionar(produto, foto){
   const k = chave(produto, foto);
-  const achado = CARRINHO.find(function(i){ return i.chave === k; });
-  if (achado) {
-    achado.qtd = Math.min(99, achado.qtd + quantidade);
-  } else {
+  if (!CARRINHO.some(function(i){ return i.chave === k; })) {
     CARRINHO.push({
       chave: k,
       produto: produto,
       opcao: (foto && foto.opcao) ? foto.opcao : '',
       arquivo: foto ? foto.arquivo : '',
-      alt: foto ? altDaFoto(produto, foto) : produto.nome,
-      qtd: quantidade
+      alt: foto ? altDaFoto(produto, foto) : produto.nome
     });
   }
   atualizarCarrinho();
-  mostrarConfirmacao(produto, foto, quantidade);
+  mostrarConfirmacao(produto, foto);
 }
 
 /* ---------------- confirmação ---------------- */
@@ -1419,7 +1789,7 @@ function contaTempo(){
   relogioConfirma = setTimeout(escondeConfirmacao, 5500);
 }
 
-function mostrarConfirmacao(produto, foto, quantidade){
+function mostrarConfirmacao(produto, foto){
   const img = document.getElementById('confirma-foto');
   if (foto && foto.arquivo) {
     img.src = foto.arquivo;
@@ -1429,14 +1799,14 @@ function mostrarConfirmacao(produto, foto, quantidade){
     img.hidden = true;
   }
   document.getElementById('confirma-nome').textContent =
-    (quantidade > 1 ? quantidade + 'x ' : '') + produto.nome +
+    produto.nome +
     ((foto && foto.opcao) ? ' · cor ' + foto.opcao : '');
   confirma.hidden = false;
   contaTempo();
 
   // o anúncio pra leitor de tela sai pela região viva já existente
   const n = totalItens();
-  aviso.textContent = produto.nome + ' adicionado ao pedido. ' +
+  aviso.textContent = produto.nome + ' adicionado à lista. ' +
     n + (n === 1 ? ' item no total.' : ' itens no total.');
 }
 
@@ -1454,7 +1824,7 @@ document.getElementById('confirma-ver').addEventListener('click', function(){
 });
 
 function totalItens(){
-  return CARRINHO.reduce(function(s, i){ return s + i.qtd; }, 0);
+  return CARRINHO.length;
 }
 
 /* ============================================================
@@ -1480,16 +1850,19 @@ function totalItens(){
    uma vez. Não tem contorno aplicado aqui: quando for tratar
    atacado a sério, isso volta. Detalhes em NOTAS.md.
    ============================================================ */
+/* A vitrine não controla estoque, então o cliente não afirma que
+   quer: ele pergunta se ainda tem. Sem quantidade também — quem
+   define quanto sai é a loja, na conversa. */
 function mensagemDoPedido(){
   const linhas = CARRINHO.map(function(i){
     const preco = precoEmReais(i.produto.preco);
-    return '• ' + i.qtd + 'x ' + descricao(i.produto, i.opcao) +
-           (preco ? ' — ' + preco + ' cada' : '');
+    return '- ' + descricao(i.produto, i.opcao) +
+           (preco ? ' — ' + (i.produto.apartir ? 'a partir de ' : '') + preco : '');
   });
   const faltaPreco = CARRINHO.some(function(i){ return i.produto.preco === null; });
-  return 'Olá! Vi no site e quero fazer um pedido:\n\n' +
+  return 'Olá! Vi no site e queria saber se ainda tem esses aqui:\n\n' +
          linhas.join('\n') + '\n\n' +
-         (faltaPreco ? 'Qual fica o valor?' : 'Ainda tem tudo?');
+         (faltaPreco ? 'Se tiver, quanto fica?' : 'Se tiver, pode separar?');
 }
 
 function atualizarCarrinho(){
@@ -1497,17 +1870,17 @@ function atualizarCarrinho(){
   contaTopo.textContent = String(n);
   botaoTopo.dataset.vazio = n ? 'nao' : 'sim';
   botaoTopo.setAttribute('aria-label', n
-    ? 'Ver pedido, ' + n + (n === 1 ? ' item' : ' itens')
-    : 'Ver pedido, vazio');
+    ? 'Ver minha lista, ' + n + (n === 1 ? ' item' : ' itens')
+    : 'Ver minha lista, vazia');
 
   contaBarra.textContent = String(n);
   document.getElementById('abrir-carrinho-barra').setAttribute('aria-label', n
-    ? 'Ver pedido, ' + n + (n === 1 ? ' item' : ' itens')
-    : 'Ver pedido, vazio');
+    ? 'Ver minha lista, ' + n + (n === 1 ? ' item' : ' itens')
+    : 'Ver minha lista, vazia');
 
   aviso.textContent = n
-    ? n + (n === 1 ? ' item no pedido' : ' itens no pedido')
-    : 'Pedido vazio';
+    ? n + (n === 1 ? ' item na lista' : ' itens na lista')
+    : 'Lista vazia';
 
   if (modalCarrinho.open) pintaCarrinho();
 }
@@ -1521,7 +1894,7 @@ function pintaCarrinho(){
   if (!CARRINHO.length) {
     const p = document.createElement('p');
     p.className = 'pedido__vazio';
-    p.textContent = 'Seu pedido está vazio. Toque em Adicionar num produto.';
+    p.textContent = 'Sua lista está vazia. Toque em Quero este num produto.';
     lista.appendChild(p);
     return;
   }
@@ -1561,43 +1934,15 @@ function pintaCarrinho(){
       dados.appendChild(d);
     }
 
+    // sem quantidade: só tirar da lista
     const controles = document.createElement('div');
     controles.className = 'pedido__controles';
-
-    const qtd = document.createElement('div');
-    qtd.className = 'qtd';
-
-    const menos = document.createElement('button');
-    menos.type = 'button';
-    menos.className = 'qtd__botao';
-    menos.textContent = '−';
-    menos.setAttribute('aria-label', 'Diminuir quantidade de ' + item.produto.nome);
-    menos.disabled = item.qtd <= 1;
-    menos.addEventListener('click', function(){
-      if (item.qtd > 1) { item.qtd--; atualizarCarrinho(); }
-    });
-
-    const valor = document.createElement('span');
-    valor.className = 'qtd__valor';
-    valor.textContent = String(item.qtd);
-
-    const mais = document.createElement('button');
-    mais.type = 'button';
-    mais.className = 'qtd__botao';
-    mais.textContent = '+';
-    mais.setAttribute('aria-label', 'Aumentar quantidade de ' + item.produto.nome);
-    mais.addEventListener('click', function(){
-      if (item.qtd < 99) { item.qtd++; atualizarCarrinho(); }
-    });
-
-    qtd.append(menos, valor, mais);
-    controles.appendChild(qtd);
 
     const tirar = document.createElement('button');
     tirar.type = 'button';
     tirar.className = 'botao-simples';
-    tirar.textContent = 'Remover';
-    tirar.setAttribute('aria-label', 'Remover ' + item.produto.nome + ' do pedido');
+    tirar.textContent = 'Tirar da lista';
+    tirar.setAttribute('aria-label', 'Tirar ' + item.produto.nome + ' da lista');
     tirar.addEventListener('click', function(){
       const i = CARRINHO.indexOf(item);
       if (i >= 0) CARRINHO.splice(i, 1);
@@ -1614,7 +1959,7 @@ function pintaCarrinho(){
 
   const nota = document.createElement('p');
   nota.className = 'pedido__aviso';
-  nota.textContent = 'O valor não fecha aqui. A gente responde no WhatsApp com o preço.';
+  nota.textContent = 'Isto é uma consulta. A gente confere o que tem e responde no WhatsApp com o preço.';
   base.appendChild(nota);
 
   const enviar = document.createElement('a');
@@ -1622,7 +1967,7 @@ function pintaCarrinho(){
   enviar.href = linkWhats(mensagemDoPedido());
   enviar.target = '_blank';
   enviar.rel = 'noopener';
-  enviar.textContent = 'Enviar pedido no WhatsApp';
+  enviar.textContent = 'Perguntar no WhatsApp';
   base.appendChild(enviar);
 }
 

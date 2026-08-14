@@ -15,6 +15,15 @@ CLAUDE.md
 # Fica local de propósito — publicada, viraria catálogo falso no ar.
 demo.html
 
+# Lote bruto como veio da Shopee/WhatsApp/Instagram, com nomes
+# originais. E a origem, nao o que vai pro ar.
+Todasasfotos/
+
+# Pasta de trabalho das imagens. Fica fora do repositorio porque
+# guarda os prints da Shopee COM PRECO e a pasta nao-publicar.
+# O que vai pro ar foi copiado pra fotos/produtos/.
+fotos-organizadas/
+
 # Lixo de sistema operacional
 Thumbs.db
 ehthumbs.db

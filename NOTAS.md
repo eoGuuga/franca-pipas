@@ -11,20 +11,32 @@ voltar à tona depois.
 site não manda o pedido pra lugar nenhum — ele monta um texto e
 enfia no endereço. Quanto mais itens no carrinho, maior o endereço.
 
-**Medido em 11/08/2026**, com nomes de produto parecidos com os reais:
+**Remedido em 13/08/2026**, com o catálogo real de 33 produtos,
+depois que a quantidade saiu da mensagem e o marcador virou `- ` no
+lugar de `• ` (o bullet gastava 9 bytes de escape na URL, o hífen
+gasta 1):
 
-| itens distintos | mensagem (caracteres) | URL do wa.me |
+| itens distintos | mensagem | URL do wa.me |
 |---|---|---|
-| 1 | 112 | 208 |
-| 5 | 283 | 494 |
-| 10 | 545 | 968 |
-| 15 | 786 | 1.378 |
-| **25** | 1.301 | **2.270** |
-| 50 | 2.532 | 4.434 |
-| 100 | 5.198 | 9.193 |
+| 1 | 158 | 276 |
+| 5 | 369 | 571 |
+| 10 | 592 | 923 |
+| 15 | 957 | 1.554 |
+| **20** | ~1.240 | **~2.050** |
+| 25 | 1.520 | 2.482 |
 
-**Onde dói:** a partir de ~25 itens distintos a URL passa de 2.048
-caracteres. Esse é o ponto onde navegadores antigos e webviews (o
+**Piorou, não melhorou — e o motivo importa.** Tirar a quantidade
+economizou uns 10%, mas os nomes reais dos produtos são bem mais
+longos que os inventados do primeiro teste ("Carretilha com catraca
+destravada e linha Vera Cruz, 16 polegadas" contra "Carretilha
+ProMax, 20 polegadas"). O nome longo comeu a economia e passou.
+
+**O teto caiu de ~25 para ~20 itens.** É o número que vale, porque
+foi medido no catálogo que está no ar.
+
+Lição pra quando isso voltar: **a alavanca real é o tamanho do nome
+do produto**, não a quantidade nem o marcador. Cada caractere no
+nome multiplica pela quantidade de itens na lista. Esse é o ponto onde navegadores antigos e webviews (o
 navegador embutido do próprio WhatsApp, por exemplo) começam a
 cortar URL. Chrome e Safari modernos aguentam bem mais, mas **o
 wa.me não documenta limite nenhum** — então não dá pra afirmar onde
@@ -37,6 +49,9 @@ nunca vai acontecer. Com atacado de verdade, vai.
 **Não foi contornado.** Decisão consciente de 11/08/2026: registrar
 e seguir. Quando o assunto voltar, as saídas conhecidas são:
 
+- ~~Tirar a quantidade~~ — feito em 13/08/2026, por outro motivo:
+  a vitrine não controla estoque, então o cliente pergunta se tem em
+  vez de afirmar que quer. O ganho na URL foi efeito colateral.
 - Encurtar a linha do item (tirar medida, abreviar nome)
 - Limitar quantos itens distintos entram no pedido, com aviso claro
 - Quebrar em mais de uma mensagem
