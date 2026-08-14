@@ -1,5 +1,38 @@
 # Notas do projeto
 
+---
+
+## Recorte de fundo: SEMPRE conferir o topo da pipa
+
+**Regra, aprendida na prática em 14/08/2026.**
+
+Produto com **haste, vareta, cabresto ou estirante no topo** tende a
+perder esse detalhe no recorte automático de fundo. A vareta tem
+poucos pixels e o modelo trata como ruído. O resultado é uma pipa que
+parece **quebrada** — e isso é alterar o produto, não remover fundo.
+
+**Se rodar recorte em foto nova de pipa, conferir especificamente o
+topo antes de aprovar.** Olhar a silhueta inteira não basta: o corpo
+sai perfeito e a haste some, então a foto passa numa olhada rápida.
+
+Não dá pra detectar isso por número: perder uma vareta de 2 px não
+move área nem alfa parcial. **Só olho pega.**
+
+Já aconteceu uma vez: 27 fotos foram publicadas recortadas e tiveram
+que voltar para a original —
+
+| produto | fotos revertidas |
+|---|---|
+| Pipa de latão laminado 60 cm | 10 (todas) |
+| Pipa de latão de seda 60 cm | 14 (todas) |
+| Pipa corte e recorte 80 cm | 1 (a última da tira) |
+| Pipa Baruel 55 cm | 1 (a principal) |
+| Pipa caçadeira 62 cm | 1 (a principal) |
+
+As originais ficam intactas em `fotos-organizadas/produtos/`, que o
+recorte nunca toca. Reverter é copiar de lá para `fotos/produtos/`.
+
+
 Coisas medidas que não estão óbvias no código, e decisões que vão
 voltar à tona depois.
 
