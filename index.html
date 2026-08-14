@@ -486,6 +486,33 @@ button,a,summary,label{touch-action:manipulation}
 
 .produto--esgotado .foto img{filter:grayscale(1);opacity:.55}
 
+.selo{display:inline-flex;align-items:center;gap:.3rem;margin:.6rem .75rem 0;padding:.3rem .5rem;font-size:.6rem;font-weight:800;font-stretch:78%;text-transform:uppercase;letter-spacing:.06em;color:var(--preto);background:var(--amarelo);border:1.5px solid var(--preto);border-radius:4px}
+.produto__nota{padding:.3rem .75rem 0;color:var(--tinta-fraca);font-size:.68rem;font-weight:700}
+.produto__nota b{color:var(--tinta);font-weight:800}
+.fonte-dados{margin-top:1rem;color:var(--tinta-fraca);font-size:.7rem}
+
+.avaliacoes{border-top:1.5px solid var(--borda);padding-top:clamp(1.5rem,4vw,2.5rem);padding-bottom:clamp(1.5rem,4vw,2.5rem)}
+.avaliacoes__titulo{font-size:clamp(1.2rem,4vw,1.7rem);font-weight:900;font-stretch:86%;line-height:1.1}
+.avaliacoes__fonte{margin-top:.4rem;color:var(--tinta-fraca);font-size:.8rem}
+.avaliacoes__lista{display:grid;grid-template-columns:1fr;gap:.7rem;margin-top:1.1rem}
+@media (min-width:600px){.avaliacoes__lista{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:900px){.avaliacoes__lista{grid-template-columns:repeat(3,1fr)}}
+.avaliacao{padding:.85rem;background:var(--branco);border:1.5px solid var(--borda);border-radius:8px}
+.avaliacao__estrelas{color:var(--laranja);font-size:.8rem;letter-spacing:.1em}
+.avaliacao__texto{margin-top:.35rem;font-size:.9rem;line-height:1.4}
+.avaliacao__pe{margin-top:.5rem;color:var(--tinta-fraca);font-size:.7rem;font-weight:700}
+
+.pedido__qtd{display:flex;align-items:center;gap:.4rem}
+.pedido__qtd button{width:32px;height:32px;display:grid;place-items:center;font:inherit;font-size:1rem;cursor:pointer;background:var(--branco);border:1.5px solid var(--preto);border-radius:5px}
+.pedido__qtd button:disabled{opacity:.35;cursor:default}
+.pedido__qtd span{min-width:1.6ch;text-align:center;font-weight:800}
+
+.obs{margin-bottom:.7rem}
+.obs label{display:block;font-size:.72rem;font-weight:800;font-stretch:80%;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+.obs textarea{width:100%;font:inherit;font-size:.85rem;padding:.5rem;border:1.5px solid var(--borda);border-radius:6px;resize:vertical;min-height:2.6rem}
+.obs textarea:focus{border-color:var(--preto)}
+.obs__conta{margin-top:.2rem;text-align:right;color:var(--tinta-fraca);font-size:.68rem}
+
 .grade__vazio{grid-column:1/-1;color:var(--tinta-fraca)}
 
 /* ---------- miniaturas ---------- */
@@ -536,8 +563,38 @@ button,a,summary,label{touch-action:manipulation}
 .rodape__linha{margin-top:.6rem;max-width:44ch;color:var(--tinta-clara)}
 .rodape .botao{margin-top:1.2rem}
 
-.rodape__pe{
+/* ---------- redes ---------- */
+
+.redes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
   margin-top:1.75rem;
+}
+
+.rede{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  padding:.75rem .85rem;   /* alvo de toque de 44px */
+  color:var(--branco);
+  font-size:.72rem;
+  font-weight:800;
+  font-stretch:82%;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  text-decoration:none;
+  border:1.5px solid rgba(255,255,255,.35);
+  border-radius:6px;
+  transition:background-color .12s ease,border-color .12s ease;
+}
+
+.rede:hover{background:rgba(255,255,255,.12);border-color:var(--branco)}
+.rede svg{width:18px;height:18px;flex:none}
+.rodape :focus-visible{outline-color:var(--branco)}
+
+.rodape__pe{
+  margin-top:1.25rem;
   color:var(--tinta-clara);
   font-size:.68rem;
   font-weight:700;
@@ -858,6 +915,43 @@ button,a,summary,label{touch-action:manipulation}
       <div class="filtros" id="filtros" role="group" aria-label="Filtrar por categoria"></div>
       <p class="so-leitor" role="status" id="aviso"></p>
       <ul class="grade" id="grade"></ul>
+      <p class="fonte-dados">Nota e vendas por mês segundo a loja da França Pipas na Shopee, em agosto de 2026.</p>
+    </div>
+  </section>
+
+  <section class="avaliacoes" aria-labelledby="titulo-avaliacoes">
+    <div class="conteudo">
+      <h2 class="avaliacoes__titulo" id="titulo-avaliacoes">O que dizem quem já comprou</h2>
+      <p class="avaliacoes__fonte">Avaliações publicadas na
+        <a href="https://shopee.com.br/francapipas" target="_blank" rel="noopener">loja da França Pipas na Shopee</a>.
+        Texto e nome de usuário como estão lá.</p>
+      <ul class="avaliacoes__lista">
+        <li class="avaliacao">
+          <p class="avaliacao__estrelas" aria-label="5 de 5 estrelas"><span aria-hidden="true">★★★★★</span></p>
+          <p class="avaliacao__texto">&ldquo;Pipas muito bem feitas, muito bonitas. Parabéns pelo trampo e sucesso.&rdquo;</p>
+          <p class="avaliacao__pe">augustodi &middot; na Shopee</p>
+        </li>
+        <li class="avaliacao">
+          <p class="avaliacao__estrelas" aria-label="5 de 5 estrelas"><span aria-hidden="true">★★★★★</span></p>
+          <p class="avaliacao__texto">&ldquo;Podem comprar, chegou certo e sem nenhum rasgado, e parecem bons!!!!&rdquo;</p>
+          <p class="avaliacao__pe">alesantos9 &middot; na Shopee</p>
+        </li>
+        <li class="avaliacao">
+          <p class="avaliacao__estrelas" aria-label="5 de 5 estrelas"><span aria-hidden="true">★★★★★</span></p>
+          <p class="avaliacao__texto">&ldquo;Pipas top mano de boa qualidade e bem embalado obrigado aos vendedores&rdquo;</p>
+          <p class="avaliacao__pe">alifesilva63 &middot; na Shopee</p>
+        </li>
+        <li class="avaliacao">
+          <p class="avaliacao__estrelas" aria-label="5 de 5 estrelas"><span aria-hidden="true">★★★★★</span></p>
+          <p class="avaliacao__texto">&ldquo;Recomendo o vendedor top&rdquo;</p>
+          <p class="avaliacao__pe">carloshenriquesoares709 &middot; na Shopee</p>
+        </li>
+        <li class="avaliacao">
+          <p class="avaliacao__estrelas" aria-label="5 de 5 estrelas"><span aria-hidden="true">★★★★★</span></p>
+          <p class="avaliacao__texto">&ldquo;Top os pipas, todos eles perfeitos e chegou antes do prazo.&rdquo;</p>
+          <p class="avaliacao__pe">andrfenerich &middot; na Shopee</p>
+        </li>
+      </ul>
     </div>
   </section>
 </main>
@@ -867,6 +961,32 @@ button,a,summary,label{touch-action:manipulation}
     <h2 class="rodape__titulo">Não achou o que queria?</h2>
     <p class="rodape__linha">Manda mensagem falando o que você procura. Se for pra revender, chama também.</p>
     <a class="botao botao--amarelo botao--grande" id="zap-geral" href="#" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+    <!-- ícones desenhados aqui mesmo, sem biblioteca: são 3 formas
+         simples e carregar uma fonte de ícone por causa disso não
+         se paga. aria-hidden porque o rótulo é o texto ao lado. -->
+    <div class="redes">
+      <a class="rede" href="https://shopee.com.br/francapipas" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 8h16l-1.2 12H5.2L4 8Z"/><path d="M8.5 8V6a3.5 3.5 0 0 1 7 0v2"/>
+        </svg>
+        Shopee<span class="so-leitor">, loja da França Pipas — abre em nova aba</span>
+      </a>
+      <a class="rede" href="https://www.instagram.com/franca.pipas/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/>
+          <circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/>
+        </svg>
+        Instagram<span class="so-leitor">, perfil da França Pipas — abre em nova aba</span>
+      </a>
+      <a class="rede" href="https://www.tiktok.com/@franca.pipas" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.6 3h-2.8v12.2a2.6 2.6 0 1 1-2.6-2.6c.25 0 .49.04.72.1v-2.85a5.5 5.5 0 1 0 4.68 5.43V8.9a6.6 6.6 0 0 0 3.8 1.22V7.3A3.9 3.9 0 0 1 16.6 3Z"/>
+        </svg>
+        TikTok<span class="so-leitor">, perfil da França Pipas — abre em nova aba</span>
+      </a>
+    </div>
+
     <p class="rodape__pe">França Pipas · Atacado e varejo · Francisco Morato, SP</p>
   </div>
 </footer>
@@ -979,6 +1099,93 @@ const NUMERO = '5511954871911';
    ============================================================ */
 const PRODUTOS = [
   {
+    nome: "Engomador de linha Submarino, cola com resina",
+    categoria: "Acessórios",
+    medida: "500 g",
+    preco: 20,
+    apartir: true,
+    destaque: true,
+    nota: 4.9,
+    vendasMes: 75,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/engomador-cola-resina-submarino/engomador-cola-resina-submarino-01.webp",
+        alt: "Três potes brancos de engomador com etiqueta da França Pipas" },
+      { arquivo: "fotos/produtos/engomador-cola-resina-submarino/engomador-cola-resina-submarino-02.webp" }
+    ]
+  },
+  {
+    nome: "Pipa de latão laminado 60 cm",
+    categoria: "Pipas",
+    medida: "Kit com 5 ou 10 unidades",
+    preco: 40,
+    apartir: true,
+    destaque: true,
+    nota: 4.8,
+    vendasMes: 32,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-01.webp",
+        alt: "Pipa de latão dourado espelhado, encostada numa parede branca" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-05.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-06.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-07.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-08.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-09.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-10.webp" }
+    ]
+  },
+  {
+    nome: "Pipa de latão de seda 60 cm",
+    categoria: "Pipas",
+    medida: "Kit com 5 ou 10 unidades",
+    preco: 40,
+    apartir: true,
+    destaque: true,
+    nota: 4.9,
+    vendasMes: 25,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-01.webp",
+        alt: "Pipa de seda em faixas azul, verde-clara e azul-escura, encostada na parede" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-05.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-06.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-07.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-08.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-09.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-10.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-11.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-12.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-13.webp" },
+      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-14.webp" }
+    ]
+  },
+  {
+    nome: "Pipa corte e recorte de seda",
+    categoria: "Pipas",
+    medida: "80 cm · kit com 5",
+    preco: 65,
+    destaque: true,
+    nota: 5.0,
+    vendasMes: 19,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-01.webp",
+        alt: "Pipa grande com recorte em Y, em verde-água, rosa, amarelo e preto, segurada pelo estirante" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-02.webp" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-03.webp" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-04.webp" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-05.webp" },
+      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-06.webp" }
+    ]
+  },
+  {
     nome: "Carretilha com catraca destravada e linha Vera Cruz",
     categoria: "Carretilhas",
     medida: "16 polegadas",
@@ -998,7 +1205,11 @@ const PRODUTOS = [
     estoque: true,
     fotos: [
       { arquivo: "fotos/produtos/carretilha-crua-madeira-compensado-naval/carretilha-crua-madeira-compensado-naval-01.webp",
-        alt: "Carretilha de compensado claro sem pintura, com furos redondos em duas fileiras" }
+        alt: "Carretilha de compensado claro sem pintura, com furos redondos em duas fileiras" },
+      { arquivo: "fotos/produtos/carretilha-crua-madeira-compensado-naval/carretilha-crua-madeira-compensado-naval-02.webp" },
+      { arquivo: "fotos/produtos/carretilha-crua-madeira-compensado-naval/carretilha-crua-madeira-compensado-naval-03.webp" },
+      { arquivo: "fotos/produtos/carretilha-crua-madeira-compensado-naval/carretilha-crua-madeira-compensado-naval-04.webp" },
+      { arquivo: "fotos/produtos/carretilha-crua-madeira-compensado-naval/carretilha-crua-madeira-compensado-naval-05.webp" }
     ]
   },
   {
@@ -1074,6 +1285,16 @@ const PRODUTOS = [
       { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-05.webp" },
       { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-06.webp" },
       { arquivo: "fotos/produtos/carretilha-promax-22-pol/carretilha-promax-22-pol-07.webp" }
+    ]
+  },
+  {
+    nome: "Armação de pipa em latão 62 cm",
+    categoria: "Pipas",
+    medida: "Kit com 25 unidades",
+    preco: null,
+    estoque: true,
+    fotos: [
+      { arquivo: "fotos/produtos/armacao-pipa-latao-62cm/armacao-pipa-latao-62cm-01.webp" }
     ]
   },
   {
@@ -1154,22 +1375,6 @@ const PRODUTOS = [
     ]
   },
   {
-    nome: "Pipa corte e recorte de seda",
-    categoria: "Pipas",
-    medida: "80 cm · kit com 5",
-    preco: 65,
-    estoque: true,
-    fotos: [
-      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-01.webp",
-        alt: "Pipa grande com recorte em Y, em verde-água, rosa, amarelo e preto, segurada pelo estirante" },
-      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-02.webp" },
-      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-03.webp" },
-      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-04.webp" },
-      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-05.webp" },
-      { arquivo: "fotos/produtos/pipa-corte-recorte-80cm/pipa-corte-recorte-80cm-06.webp" }
-    ]
-  },
-  {
     nome: "Pipa corte e recorte laminada, com rabiola",
     categoria: "Pipas",
     medida: "Kit com 3 · rabiola de 15 m",
@@ -1180,52 +1385,6 @@ const PRODUTOS = [
         alt: "Pipa verde com cruz amarela e preta, apoiada no chão" },
       { arquivo: "fotos/produtos/pipa-corte-recorte-laminado-rabiola/pipa-corte-recorte-laminado-rabiola-02.webp" },
       { arquivo: "fotos/produtos/pipa-corte-recorte-laminado-rabiola/pipa-corte-recorte-laminado-rabiola-03.webp" }
-    ]
-  },
-  {
-    nome: "Pipa de latão laminado 60 cm",
-    categoria: "Pipas",
-    medida: "Kit com 5 ou 10 unidades",
-    preco: 40,
-    apartir: true,
-    estoque: true,
-    fotos: [
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-01.webp",
-        alt: "Pipa de latão dourado espelhado, encostada numa parede branca" },
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-02.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-03.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-04.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-05.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-06.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-07.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-08.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-09.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-laminado-60cm/pipa-latao-laminado-60cm-10.webp" }
-    ]
-  },
-  {
-    nome: "Pipa de latão de seda 60 cm",
-    categoria: "Pipas",
-    medida: "Kit com 5 ou 10 unidades",
-    preco: 40,
-    apartir: true,
-    estoque: true,
-    fotos: [
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-01.webp",
-        alt: "Pipa de seda em faixas azul, verde-clara e azul-escura, encostada na parede" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-02.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-03.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-04.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-05.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-06.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-07.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-08.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-09.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-10.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-11.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-12.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-13.webp" },
-      { arquivo: "fotos/produtos/pipa-latao-seda-60cm/pipa-latao-seda-60cm-14.webp" }
     ]
   },
   {
@@ -1385,7 +1544,8 @@ const PRODUTOS = [
         alt: "Cone de linha rosa embalado, com rótulo amarelo Vera Cruz fio 10" },
       { arquivo: "fotos/produtos/linha-vera-cruz-fio-10-6000-jardas/linha-vera-cruz-fio-10-6000-jardas-02.webp" },
       { arquivo: "fotos/produtos/linha-vera-cruz-fio-10-6000-jardas/linha-vera-cruz-fio-10-6000-jardas-03.webp" },
-      { arquivo: "fotos/produtos/linha-vera-cruz-fio-10-6000-jardas/linha-vera-cruz-fio-10-6000-jardas-04.webp" }
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-10-6000-jardas/linha-vera-cruz-fio-10-6000-jardas-04.webp" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-10-6000-jardas/linha-vera-cruz-fio-10-6000-jardas-05.webp" }
     ]
   },
   {
@@ -1398,7 +1558,8 @@ const PRODUTOS = [
       { arquivo: "fotos/produtos/linha-vera-cruz-fio-4/linha-vera-cruz-fio-4-01.webp",
         alt: "Cone de linha vermelha com rótulo amarelo Vera Cruz, sem embalagem" },
       { arquivo: "fotos/produtos/linha-vera-cruz-fio-4/linha-vera-cruz-fio-4-02.webp" },
-      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4/linha-vera-cruz-fio-4-03.webp" }
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4/linha-vera-cruz-fio-4-03.webp" },
+      { arquivo: "fotos/produtos/linha-vera-cruz-fio-4/linha-vera-cruz-fio-4-04.webp" }
     ]
   },
   {
@@ -1450,19 +1611,6 @@ const PRODUTOS = [
     fotos: [
       { arquivo: "fotos/produtos/cola-vegetal-resinada/cola-vegetal-resinada-01.webp",
         alt: "Quatro frascos de cola colorida, nas cores amarelo, rosa, verde e laranja, em embalagem plástica" }
-    ]
-  },
-  {
-    nome: "Engomador de linha Submarino, cola com resina",
-    categoria: "Acessórios",
-    medida: "500 g",
-    preco: 20,
-    apartir: true,
-    estoque: true,
-    fotos: [
-      { arquivo: "fotos/produtos/engomador-cola-resina-submarino/engomador-cola-resina-submarino-01.webp",
-        alt: "Três potes brancos de engomador com etiqueta da França Pipas" },
-      { arquivo: "fotos/produtos/engomador-cola-resina-submarino/engomador-cola-resina-submarino-02.webp" }
     ]
   }
 ];
@@ -1628,11 +1776,30 @@ function montaCard(produto, indice){
     card.appendChild(cx);
   }
 
+  // selo e dados vem da Shopee da loja; so aparecem quando existem
+  if (produto.destaque) {
+    const selo = document.createElement('p');
+    selo.className = 'selo';
+    selo.textContent = 'Entre os mais vendidos na Shopee';
+    card.appendChild(selo);
+  }
+
   if (produto.medida) {
     const medida = document.createElement('p');
     medida.className = 'produto__medida';
     medida.textContent = produto.medida;
     card.appendChild(medida);
+  }
+
+  if (produto.nota) {
+    const n = document.createElement('p');
+    n.className = 'produto__nota';
+    n.append('★ ');
+    const b = document.createElement('b');
+    b.textContent = String(produto.nota).replace('.', ',');
+    n.appendChild(b);
+    n.append(' · ' + produto.vendasMes + ' vendidos por mês');
+    card.appendChild(n);
   }
 
   const preco = precoEmReais(produto.preco);
@@ -1766,7 +1933,8 @@ function adicionar(produto, foto){
       produto: produto,
       opcao: (foto && foto.opcao) ? foto.opcao : '',
       arquivo: foto ? foto.arquivo : '',
-      alt: foto ? altDaFoto(produto, foto) : produto.nome
+      alt: foto ? altDaFoto(produto, foto) : produto.nome,
+      qtd: 1
     });
   }
   atualizarCarrinho();
@@ -1827,6 +1995,11 @@ function totalItens(){
   return CARRINHO.length;
 }
 
+/* Observação única do pedido inteiro, limitada. Por item seria texto
+   livre sem teto, e a URL do wa.me já fecha em ~20 itens. */
+const LIMITE_OBS = 120;
+let observacao = '';
+
 /* ============================================================
    LIMITE CONHECIDO — leia antes de mexer aqui
 
@@ -1856,13 +2029,14 @@ function totalItens(){
 function mensagemDoPedido(){
   const linhas = CARRINHO.map(function(i){
     const preco = precoEmReais(i.produto.preco);
-    return '- ' + descricao(i.produto, i.opcao) +
+    return '- ' + (i.qtd > 1 ? i.qtd + 'x ' : '') + descricao(i.produto, i.opcao) +
            (preco ? ' — ' + (i.produto.apartir ? 'a partir de ' : '') + preco : '');
   });
   const faltaPreco = CARRINHO.some(function(i){ return i.produto.preco === null; });
   return 'Olá! Vi no site e queria saber se ainda tem esses aqui:\n\n' +
          linhas.join('\n') + '\n\n' +
-         (faltaPreco ? 'Se tiver, quanto fica?' : 'Se tiver, pode separar?');
+         (faltaPreco ? 'Se tiver, quanto fica?' : 'Se tiver, pode separar?') +
+         (observacao.trim() ? '\n\n' + observacao.trim() : '');
 }
 
 function atualizarCarrinho(){
@@ -1886,6 +2060,7 @@ function atualizarCarrinho(){
 }
 
 function pintaCarrinho(){
+  const enviar = document.createElement('a');
   const lista = document.getElementById('pedido-lista');
   const base  = document.getElementById('pedido-base');
   lista.replaceChildren();
@@ -1934,9 +2109,25 @@ function pintaCarrinho(){
       dados.appendChild(d);
     }
 
-    // sem quantidade: só tirar da lista
     const controles = document.createElement('div');
     controles.className = 'pedido__controles';
+
+    // quantidade e opcional: padrao 1, e so aparece na mensagem quando > 1
+    const cq = document.createElement('div');
+    cq.className = 'pedido__qtd';
+    const menos = document.createElement('button');
+    menos.type = 'button'; menos.textContent = '−';
+    menos.setAttribute('aria-label', 'Diminuir quantidade de ' + item.produto.nome);
+    menos.disabled = item.qtd <= 1;
+    menos.addEventListener('click', function(){ if (item.qtd > 1) { item.qtd--; atualizarCarrinho(); } });
+    const val = document.createElement('span');
+    val.textContent = String(item.qtd);
+    const mais = document.createElement('button');
+    mais.type = 'button'; mais.textContent = '+';
+    mais.setAttribute('aria-label', 'Aumentar quantidade de ' + item.produto.nome);
+    mais.addEventListener('click', function(){ if (item.qtd < 99) { item.qtd++; atualizarCarrinho(); } });
+    cq.append(menos, val, mais);
+    controles.appendChild(cq);
 
     const tirar = document.createElement('button');
     tirar.type = 'button';
@@ -1957,12 +2148,34 @@ function pintaCarrinho(){
 
   lista.appendChild(ul);
 
+  const cxObs = document.createElement('div');
+  cxObs.className = 'obs';
+  const rot = document.createElement('label');
+  rot.htmlFor = 'obs-pedido';
+  rot.textContent = 'Quer dizer mais alguma coisa?';
+  const ta = document.createElement('textarea');
+  ta.id = 'obs-pedido';
+  ta.maxLength = LIMITE_OBS;
+  ta.rows = 2;
+  ta.placeholder = 'Ex.: preciso de 10 de cada, é pra revenda';
+  ta.value = observacao;
+  const conta = document.createElement('p');
+  conta.className = 'obs__conta';
+  const pinta = function(){ conta.textContent = ta.value.length + '/' + LIMITE_OBS; };
+  ta.addEventListener('input', function(){
+    observacao = ta.value;
+    pinta();
+    enviar.href = linkWhats(mensagemDoPedido());
+  });
+  pinta();
+  cxObs.append(rot, ta, conta);
+  base.appendChild(cxObs);
+
   const nota = document.createElement('p');
   nota.className = 'pedido__aviso';
   nota.textContent = 'Isto é uma consulta. A gente confere o que tem e responde no WhatsApp com o preço.';
   base.appendChild(nota);
 
-  const enviar = document.createElement('a');
   enviar.className = 'botao botao--bloco botao--grande';
   enviar.href = linkWhats(mensagemDoPedido());
   enviar.target = '_blank';
